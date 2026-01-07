@@ -9,52 +9,93 @@ This repository contains a collection of agent skills designed to prevent typica
 ```
 skills/
 ├── README.md                          # This file
+├── INDEX.md                           # Auto-generated skill index
 ├── LICENSE                            # Repository license
 ├── SPEC.md                            # Formal specification for skills
-├── audit/                             # Code quality audit skills
-│   ├── inline-complexity/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   ├── lexical-ontology/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   ├── module-stutter/
+├── adapter/                           # Adapter skills for IDE/tools
+│   ├── cursor/
 │   │   ├── SKILL.md
 │   │   ├── references/
 │   │   └── scripts/
-│   ├── semantic-noise/
+│   └── windsurf/
+│       ├── SKILL.md
+│       ├── assets/
+│       ├── references/
+│       └── scripts/
+├── index/                             # Skill indexing and discovery
+│   ├── SKILL.md
+│   ├── references/
+│   └── scripts/
+├── plan/                              # Planning and execution skillset
+│   ├── SKILL.md                       # Skillset orchestrator
+│   ├── create/
 │   │   ├── SKILL.md
-│   │   └── references/
-│   └── structural-duplication/
+│   │   ├── references/
+│   │   └── scripts/
+│   └── exec/
 │       ├── SKILL.md
 │       └── references/
-└── phase/                             # Development phase management skills
-    ├── execute/
+└── refactor/                          # Code refactoring skillset
+    ├── SKILL.md                       # Skillset orchestrator
+    ├── dictionaries/
     │   ├── SKILL.md
     │   └── references/
-    └── plan/
+    ├── import-hygiene/
+    │   ├── SKILL.md
+    │   └── references/
+    ├── inline-complexity/
+    │   ├── SKILL.md
+    │   └── references/
+    ├── lexical-ontology/
+    │   ├── SKILL.md
+    │   └── references/
+    ├── module-stutter/
+    │   ├── SKILL.md
+    │   ├── references/
+    │   └── scripts/
+    ├── semantic-noise/
+    │   ├── SKILL.md
+    │   └── references/
+    └── structural-duplication/
         ├── SKILL.md
         └── references/
 ```
 
 ## Skills Index
 
-### Audit Skills
+### Adapter Skills
 
-Code quality audit skills for identifying and preventing common issues:
+Adapter skills for generating IDE and tool integrations:
 
-- **[inline-complexity](./audit/inline-complexity/SKILL.md)** - Audit inline complexity and recommend variable extraction. Produces a report with flattening suggestions for nested expressions.
-- **[lexical-ontology](./audit/lexical-ontology/SKILL.md)** - Audit lexical ontology for consistent and meaningful naming.
-- **[module-stutter](./audit/module-stutter/SKILL.md)** - Detect module/package name stutter in Python public APIs. Produces a Markdown report and optional CI gate.
-- **[semantic-noise](./audit/semantic-noise/SKILL.md)** - Audit semantic noise and recommend improvements for code clarity.
-- **[structural-duplication](./audit/structural-duplication/SKILL.md)** - Identify structural duplication patterns and suggest refactoring opportunities.
+- **[cursor](./adapter/cursor/SKILL.md)** - Generate Cursor commands from agent skills. Creates plain markdown command files that delegate to skill references, enabling Cursor to invoke agent skills.
+- **[windsurf](./adapter/windsurf/SKILL.md)** - Generate Windsurf workflows from agent skills. Creates thin workflow adapters that point to skill references, enabling Windsurf to invoke agent skills via slash commands.
 
-### Phase Skills
+### Index Skill
+
+Skill indexing and discovery:
+
+- **[index](./index/SKILL.md)** - Generate a hierarchical index of all skills from SKILL.md files. Produces a Markdown index optimized for agent lookup with skillsets, member skills, keywords, and pipelines.
+
+### Plan Skillset
 
 Development phase management skills:
 
-- **[execute](./phase/execute/SKILL.md)** - Execute development tasks within a planned phase.
-- **[plan](./phase/plan/SKILL.md)** - Convert the current conversation into a new numbered planning phase. Creates docs/planning/phase-N/ with root and subphase plan.md scaffolds.
+- **[plan](./plan/SKILL.md)** - Orchestrator skill for the `plan` skillset. Dispatches to member skills in a safe, predictable order.
+  - **[create](./plan/create/SKILL.md)** - Materialize the current conversation into a new docs/planning/phase-N plan (root plan plus sub-plans and task files).
+  - **[exec](./plan/exec/SKILL.md)** - Execute an existing docs/planning/phase-N plan sequentially by completing subtasks.
+
+### Refactor Skillset
+
+Code quality audit and refactoring skills:
+
+- **[refactor](./refactor/SKILL.md)** - Orchestrator skill for the `refactor` skillset. Dispatches to member skills for code quality audits and structural improvements.
+  - **[dictionaries](./refactor/dictionaries/SKILL.md)** - Audit dictionary usage against the Dictionary Usage Doctrine. Produces a severity-grouped report with minimal refactor suggestions.
+  - **[import-hygiene](./refactor/import-hygiene/SKILL.md)** - Audit Python imports to preserve semantic context and prevent shadowing after refactors.
+  - **[inline-complexity](./refactor/inline-complexity/SKILL.md)** - Audit inline complexity and recommend variable extraction. Produces a report with flattening suggestions for nested expressions.
+  - **[lexical-ontology](./refactor/lexical-ontology/SKILL.md)** - Audit identifiers and namespaces for lexical-semantic and ontological correctness.
+  - **[module-stutter](./refactor/module-stutter/SKILL.md)** - Detect module/package name stutter in Python public APIs. Produces a Markdown report and optional CI gate.
+  - **[semantic-noise](./refactor/semantic-noise/SKILL.md)** - Audit semantic noise and namespace integrity.
+  - **[structural-duplication](./refactor/structural-duplication/SKILL.md)** - Identify structurally duplicate logic (pipeline-spine duplication) across semantically distinct modules.
 
 ## Skill Structure
 
@@ -111,13 +152,14 @@ references/
 
 When adding new skills to this repository:
 
-1. Choose or create an appropriate category directory (e.g., `audit/`, `phase/`)
+1. Choose or create an appropriate category directory (e.g., `adapter/`, `index/`, `plan/`, `refactor/`)
 2. Create a new directory for your skill within the category
 3. Add a `SKILL.md` file following the canonical structure (see [SPEC.md](./SPEC.md))
 4. Create a `references/` subdirectory for detailed documentation
 5. Follow the `<NN>_<TOPIC>` naming convention for reference files (zero-padded numbers, uppercase topics)
 6. Optionally add a `scripts/` directory if your skill includes executable scripts
 7. Update the Skills Index section in this README
+8. Run the index skill to regenerate INDEX.md: `./index/scripts/index.sh`
 
 ## License
 
