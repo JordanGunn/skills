@@ -11,3 +11,7 @@ A single Markdown report:
   - Why it’s stutter
   - Minimal fix (rename suggestion)
   - Safer intermediate step (if renaming is risky)
+- Refactor completion status:
+  - "Incomplete: legacy shim still present" OR "Complete: canonical-only"
+- Canonical import path(s)
+- Legacy path(s) to remove

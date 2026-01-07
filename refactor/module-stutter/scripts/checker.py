@@ -68,9 +68,32 @@ def read_text(path: Path) -> Optional[str]:
 def extract_dunder_all(tree: ast.AST) -> Optional[set[str]]:
     """
     If __all__ is defined as a list/tuple of string literals, return that set.
+    Handles starred expressions like __all__ = [*classes, *funcs] by resolving
+    module-level variable references.
     Otherwise None (meaning: check all top-level public defs).
     """
-    for node in tree.body if isinstance(tree, ast.Module) else []:
+    if not isinstance(tree, ast.Module):
+        return None
+
+    # First pass: collect module-level string list assignments
+    string_lists: dict[str, set[str]] = {}
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and len(node.targets) == 1:
+            target = node.targets[0]
+            if isinstance(target, ast.Name) and isinstance(node.value, (ast.List, ast.Tuple)):
+                strings: set[str] = set()
+                all_strings = True
+                for elt in node.value.elts:
+                    if isinstance(elt, ast.Constant) and isinstance(elt.value, str):
+                        strings.add(elt.value)
+                    else:
+                        all_strings = False
+                        break
+                if all_strings:
+                    string_lists[target.id] = strings
+
+    # Second pass: find __all__ and resolve it
+    for node in tree.body:
         if isinstance(node, ast.Assign):
             for target in node.targets:
                 if isinstance(target, ast.Name) and target.id == "__all__":
@@ -80,6 +103,16 @@ def extract_dunder_all(tree: ast.AST) -> Optional[set[str]]:
                         for elt in val.elts:
                             if isinstance(elt, ast.Constant) and isinstance(elt.value, str):
                                 items.add(elt.value)
+                            elif isinstance(elt, ast.Starred):
+                                # Handle [*classes, *funcs] pattern
+                                if isinstance(elt.value, ast.Name):
+                                    ref_name = elt.value.id
+                                    if ref_name in string_lists:
+                                        items.update(string_lists[ref_name])
+                                    else:
+                                        return None  # Can't resolve reference
+                                else:
+                                    return None
                             else:
                                 return None
                         return items
@@ -176,6 +209,32 @@ def iter_top_level_defs(tree: ast.Module) -> Iterable[tuple[str, str, int, int]]
             yield ("function", node.name, node.lineno, node.col_offset)
 
 
+def iter_reexported_names(
+    tree: ast.Module, exported: Optional[set[str]]
+) -> Iterable[tuple[str, str, int, int]]:
+    """
+    Yield (kind, name, lineno, col) for names imported and re-exported via __all__.
+    Used for __init__.py files that re-export from submodules.
+    kind: "reexport"
+    """
+    if exported is None:
+        return
+
+    # Collect all imported names with their locations
+    imported: dict[str, tuple[int, int]] = {}
+    for node in tree.body:
+        if isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                name = alias.asname if alias.asname else alias.name
+                imported[name] = (node.lineno, node.col_offset)
+
+    # Yield names that are both imported and in __all__
+    for name in exported:
+        if name in imported:
+            lineno, col = imported[name]
+            yield ("reexport", name, lineno, col)
+
+
 def scan_file(
     path: Path,
     ignore_modules: set[str],
@@ -191,7 +250,11 @@ def scan_file(
         # Don't block on broken files; report nothing (or could emit a note).
         return []
 
-    module_base = path.stem  # e.g., work_unit from work_unit.py
+    # For __init__.py, use parent directory as the package name
+    if path.stem == "__init__":
+        module_base = path.parent.name
+    else:
+        module_base = path.stem  # e.g., work_unit from work_unit.py
     if module_base in ignore_modules:
         return []
 
@@ -199,6 +262,8 @@ def scan_file(
     exported = extract_dunder_all(tree)  # if present, only enforce on those names
 
     findings: list[Finding] = []
+
+    # Check top-level definitions (classes, functions)
     for kind, name, lineno, col in iter_top_level_defs(tree):
         if not is_public(name):
             continue
@@ -225,6 +290,32 @@ def scan_file(
                     stutter_type=stutter_type,
                 )
             )
+
+    # For __init__.py, also check re-exported names from submodules
+    if path.stem == "__init__":
+        for kind, name, lineno, col in iter_reexported_names(tree, exported):
+            if should_ignore_symbol(name, ignore_symbol_regex):
+                continue
+
+            is_stutter, stutter_type, matched_pattern = detect_stutter(
+                name, module_base, prefix
+            )
+            if is_stutter:
+                suggestion = suggest_rename(name, stutter_type, matched_pattern)
+                findings.append(
+                    Finding(
+                        path=str(path),
+                        lineno=lineno,
+                        col=col,
+                        kind=kind,
+                        name=name,
+                        module_base=module_base,
+                        prefix=prefix,
+                        suggestion=suggestion,
+                        severity="Strongly Recommended",  # re-exports are public API
+                        stutter_type=stutter_type,
+                    )
+                )
 
     return findings
 

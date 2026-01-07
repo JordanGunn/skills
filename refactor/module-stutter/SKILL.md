@@ -1,8 +1,31 @@
 ---
-name: audit-module-stutter
+name: refactor-module-stutter
+license: MIT
 description: |
   Detect module/package name stutter in Python public APIs.
   Produces a Markdown report and optional CI gate.
+metadata:
+  author: Jordan Godau
+  references:
+    - 01_GOAL.md
+    - 02_DEFINITION.md
+    - 03_RULES.md
+    - 04_ENFORCEMENT.md
+    - 05_CONFIGURATIONS.md
+    - 06_OUTPUT.md
+    - 07_SUGGESTIONS.md
+    - 08_EXAMPLES.md
+  scripts:
+    - checker.py
+    - pylint.py
+  keywords:
+    - stutter
+    - naming
+    - module
+    - package
+    - redundant
+    - prefix
+    - public API
 ---
 
 # Instructions

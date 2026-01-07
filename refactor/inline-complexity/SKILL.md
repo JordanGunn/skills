@@ -1,8 +1,26 @@
 ---
-name: audit-inline-complexity
+name: refactor-inline-complexity
+license: MIT
 description: |
   Audit inline complexity and recommend variable extraction.
   Produces a report with flattening suggestions for nested expressions.
+metadata:
+  author: Jordan Godau
+  references:
+    - 01_GOAL.md
+    - 02_DEFINITIONS.md
+    - 03_INVARIANTS.md
+    - 04_SCOPE.md
+    - 05_CHECKS.md
+    - 06_OUTPUT.md
+  keywords:
+    - complexity
+    - nested
+    - extraction
+    - flatten
+    - readability
+    - intermediate
+    - variable
 ---
 
 # Instructions

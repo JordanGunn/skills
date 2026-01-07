@@ -72,3 +72,13 @@ fragment.write_from_batch(batch)
 from fragment import write_from_batch
 write_from_batch(batch)
 ```
+
+## Shim module example (disallowed by default)
+
+Legacy file:
+
+```py
+# pulsar/api/spatial/format.py
+from pulsar.api.spatial.cache.metadata import Metadata
+__all__ = ["Metadata"]
+

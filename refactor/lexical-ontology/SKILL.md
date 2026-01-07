@@ -1,10 +1,29 @@
 ---
-name: audit-lexical-ontology
+name: refactor-lexical-ontology
+license: MIT
 description: |
   Audit identifiers and namespaces for lexical-semantic and ontological correctness.
   Detect semantic role misalignment (agent/tool/process/artifact), derivational misuse
   (e.g., -er agent nouns), and category errors between modules, packages, classes,
   functions, and data artifacts. Output a single Markdown report with actionable fixes.
+metadata:
+  author: Jordan Godau
+  references:
+    - 01_INTENT.md
+    - 02_PRECONDITONS.md
+    - 03_RULES.md
+    - 04_PROCEDURE.md
+    - 05_OUTPUT.md
+  keywords:
+    - naming
+    - ontology
+    - lexical
+    - semantic
+    - agent
+    - process
+    - artifact
+    - suffix
+    - convention
 ---
 
 # Instructions
