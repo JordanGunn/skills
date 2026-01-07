@@ -2,21 +2,30 @@
 
 Execute these steps literally, in order.
 
+## Dry-run / no-files mode
+
+If the user explicitly requests a dry-run or no files to be written:
+
+- Do not run scripts.
+- Do not create or edit any files.
+- Provide an in-chat walk-through and overall impression only.
+- Stop after responding in-chat.
+
 ## Step 1 — Create the phase directory (prefer scripts)
 
 Preferred: use a script if available.
 
 ### macOS / Linux / WSL (bash)
 
-If `scripts/new-phase-dir.sh` exists:
+If `scripts/dirs.sh` exists:
 
-- Run: `bash scripts/new-phase-dir.sh`
+- Run: `bash scripts/dirs.sh`
 - Capture the printed output path as `PHASE_DIR`
 - Derive `<N>` from that path (e.g., `docs/planning/phase-30/` → N=30)
 
 ### Windows (PowerShell)
 
-If `scripts/new-phase-dir.ps1` exists:
+If `scripts/dirs.ps1` exists:
 
 - Run: `powershell -ExecutionPolicy Bypass -File scripts/new-phase-dir.ps1`
 - Capture the printed output path as `PHASE_DIR`
