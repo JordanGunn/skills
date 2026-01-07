@@ -20,6 +20,9 @@ Derive the smallest reasonable set from the conversation. Prefer fewer, clearer 
 
 If the user asks for planning but explicitly wants no files written, do not run this skill. Produce an in-chat plan instead.
 
+If the user requests a dry-run, follow the Dry-run / no-files mode in the Procedure
+and avoid all filesystem changes.
+
 ## Examples
 
 ### Existing phases
