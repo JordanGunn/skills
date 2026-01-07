@@ -99,54 +99,148 @@ Code quality audit and refactoring skills:
 
 ## Skill Structure
 
-Each skill follows a canonical structure to ensure consistency and ease of use:
+Each skill follows a canonical structure to ensure consistency and ease of use. **SKILL.md files are now strictly frontmatter** with skill resources defined in the `metadata` key.
 
 ### Main Skill File (`SKILL.md`)
 
-The main skill file is intentionally kept thin and serves as an entry point. It contains:
+The `SKILL.md` file contains only YAML frontmatter - no Markdown body content. All instructions and documentation are referenced through the `metadata` field.
 
-#### 1. Metadata (YAML Frontmatter)
-- **Name**: The skill's name (in `name` field)
-- **Description**: A brief description of the skill's purpose (in `description` field)
+#### Required Fields
 
-Example:
+- **`name`**: The skill's unique identifier (lowercase, hyphens only)
+- **`description`**: A brief description of the skill's purpose and when to use it
+
+#### Optional Fields
+
+- **`license`**: License identifier (e.g., MIT, Apache-2.0)
+- **`compatibility`**: Environment requirements
+- **`allowed-tools`**: Pre-approved tools (experimental)
+
+#### The `metadata` Field
+
+The `metadata` field defines skill resources and properties:
+
+- **`author`**: Skill author name or organization
+- **`version`**: Semantic version string
+- **`references`**: List of reference files (e.g., `["01_GOAL.md", "02_PROCEDURE.md"]`)
+- **`scripts`**: List of executable scripts (e.g., `["index.sh", "validate.py"]`)
+- **`keywords`**: List of keywords for skill discovery
+
+**Example - Individual Skill:**
 ```yaml
 ---
-name: audit-inline-complexity
-description: |
-  Audit inline complexity and recommend variable extraction.
-  Produces a report with flattening suggestions for nested expressions.
+name: plan-create
+license: MIT
+description: >
+  Materialize the current conversation into a new docs/planning/phase-N plan
+  (root plan plus sub-plans and task files).
+metadata:
+  author: Jordan Godau
+  references:
+    - 00_INSTRUCTIONS.md
+    - 01_INTENT.md
+    - 02_PRECONDITIONS.md
+    - 03_SCRIPTS.md
+    - 04_PROCEDURE.md
+    - 05_TEMPLATES.md
+    - 06_EDGE_CASES.md
+  scripts:
+    - dirs.ps1
+    - dirs.sh
+  keywords:
+    - phase
+    - plan
+    - planning
+    - task
 ---
 ```
 
-#### 2. Instructions Section
-High-level guidance on how to use the skill, with references to detailed documentation in the `references/` directory.
+### Skillsets (Parent Skills)
 
-#### 3. Signals Section
-Indicators or triggers that suggest when this skill should be applied during an agentic programming session.
+**Skillsets** are orchestrator skills that group and coordinate related member skills. They use the special `metadata.skillset` field to define the group structure.
 
-#### 4. References Index
-A list of links to detailed instruction files in the `references/` directory. Each reference provides in-depth guidance on specific aspects of the skill.
+#### The `metadata.skillset` Field
 
-#### 5. Scripts Index
-A list of any scripts or code examples that accompany the skill.
+- **`name`**: Skillset identifier
+- **`schema_version`**: Skillset schema version (currently `1`)
+- **`skills`**: List of member skill names
+- **`resources`**: Shared resources for the skillset
+  - `root`: Shared resources directory path
+  - `assets`: List of shared asset files
+  - `scripts`: List of shared scripts
+  - `references`: List of shared reference files
+- **`pipelines`**: Skill execution pipelines
+  - `default`: Default execution order
+  - `allowed`: List of valid skill execution sequences
+- **`requires`**: Dependencies (implementation TBD)
+
+**Example - Skillset:**
+```yaml
+---
+name: plan
+description: >
+  Orchestrator skill for the `plan` skillset. Dispatches to member skills in a safe, predictable order.
+metadata:
+  author: Jordan Godau
+  version: 0.1.0
+
+  skillset:
+    name: plan
+    schema_version: 1
+    skills:
+      - plan-create
+      - plan-exec
+
+    resources:
+      root: .resources
+      assets: []
+      scripts: []
+      references: 
+        - TAXONOMY.md
+
+    pipelines:
+      default:
+        - plan-create
+        - plan-exec
+      allowed:
+        - [plan-exec]
+        - [plan-create]
+        - [plan-create, plan-exec]
+
+    requires: []
+---
+```
 
 ### References Directory
 
-Detailed instruction files are kept separate from the main `SKILL.md` file in a `references/` subdirectory. This keeps the main skill file clean and allows for modular, detailed documentation.
+Detailed instruction files are kept separate in a `references/` subdirectory. This enables progressive disclosure - agents load these files only when needed.
 
 **Naming Convention**: References follow the pattern `<NN>_<TOPIC>.md` where:
-- `<NN>` is a zero-padded sequential number (01, 02, 03, ...)
+- `<NN>` is a zero-padded sequential number (00, 01, 02, 03, ...)
 - `<TOPIC>` is a descriptive name in uppercase with underscores (e.g., `GOAL`, `DEFINITIONS`, `PROCEDURE`)
 
 **Example**:
 ```
-references/
-├── 01_INTENT.md
-├── 02_PRECONDITIONS.md
-├── 03_PROCEDURE.md
-└── 04_OUTPUT.md
+skill-name/
+├── SKILL.md                    # Frontmatter only
+├── references/
+│   ├── 00_INSTRUCTIONS.md
+│   ├── 01_INTENT.md
+│   ├── 02_PRECONDITIONS.md
+│   ├── 03_PROCEDURE.md
+│   └── 04_OUTPUT.md
+└── scripts/
+    ├── script1.sh
+    └── script2.py
 ```
+
+### Scripts Directory
+
+Contains executable scripts referenced in `metadata.scripts`. Scripts should be self-contained and handle errors gracefully.
+
+### Skillset Resources Directory
+
+Skillsets may have a shared resources directory (e.g., `.resources/`) containing assets, scripts, and references used by multiple member skills.
 
 ## Contributing
 
@@ -154,12 +248,17 @@ When adding new skills to this repository:
 
 1. Choose or create an appropriate category directory (e.g., `adapter/`, `index/`, `plan/`, `refactor/`)
 2. Create a new directory for your skill within the category
-3. Add a `SKILL.md` file following the canonical structure (see [SPEC.md](./SPEC.md))
+3. Add a `SKILL.md` file with **frontmatter only** following the canonical structure (see [SPEC.md](./SPEC.md))
+   - Include required fields: `name`, `description`
+   - Use `metadata` field to define `author`, `references`, `scripts`, and `keywords`
+   - For skillsets, add `metadata.skillset` with `skills`, `resources`, and `pipelines`
 4. Create a `references/` subdirectory for detailed documentation
-5. Follow the `<NN>_<TOPIC>` naming convention for reference files (zero-padded numbers, uppercase topics)
-6. Optionally add a `scripts/` directory if your skill includes executable scripts
-7. Update the Skills Index section in this README
-8. Run the index skill to regenerate INDEX.md: `./index/scripts/index.sh`
+5. Follow the `<NN>_<TOPIC>.md` naming convention for reference files (zero-padded numbers, uppercase topics)
+6. List reference files in `metadata.references` array
+7. Optionally add a `scripts/` directory if your skill includes executable scripts
+8. List script files in `metadata.scripts` array
+9. Update the Skills Index section in this README
+10. Run the index skill to regenerate INDEX.md: `./index/scripts/index.sh`
 
 ## License
 
