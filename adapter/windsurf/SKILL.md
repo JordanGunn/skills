@@ -13,6 +13,7 @@ metadata:
     - 03_OUTPUT.md
   scripts:
     - generate.sh
+    - generate.ps1
   keywords:
     - adapter
     - windsurf
@@ -44,4 +45,5 @@ Read all references in `references/` before using this skill.
 
 **Directory:** `scripts/`
 
-- `generate.sh`: Generates Windsurf workflows from all agent skills
+- `generate.sh`: Generates Windsurf workflows from all agent skills (macOS/Linux/WSL)
+- `generate.ps1`: Generates Windsurf workflows from all agent skills (Windows)

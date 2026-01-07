@@ -12,6 +12,7 @@ metadata:
     - 03_OUTPUT.md
   scripts:
     - generate.sh
+    - generate.ps1
   keywords:
     - adapter
     - cursor
@@ -42,4 +43,5 @@ Read all references in `references/` before using this skill.
 
 **Directory:** `scripts/`
 
-- `generate.sh`: Generates Cursor commands from all agent skills
+- `generate.sh`: Generates Cursor commands from all agent skills (macOS/Linux/WSL)
+- `generate.ps1`: Generates Cursor commands from all agent skills (Windows)

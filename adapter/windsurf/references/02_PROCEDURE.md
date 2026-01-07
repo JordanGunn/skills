@@ -4,8 +4,16 @@
 
 Run the generator script:
 
+### macOS / Linux / WSL
+
 ```bash
 .codex/skills/adapter/windsurf/scripts/generate.sh
+```
+
+### Windows (PowerShell)
+
+```powershell
+.codex\skills\adapter\windsurf\scripts\generate.ps1
 ```
 
 The script will:

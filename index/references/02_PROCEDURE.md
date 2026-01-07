@@ -2,10 +2,18 @@
 
 ## Automated (Preferred)
 
-Run the indexing script:
+Run the index generator script:
+
+### macOS / Linux / WSL
 
 ```bash
-.codex/skills/index-skills/scripts/index.sh
+.codex/skills/index/scripts/index.sh
+```
+
+### Windows (PowerShell)
+
+```powershell
+.codex\skills\index\scripts\index.ps1
 ```
 
 The script will:

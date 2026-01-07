@@ -1,4 +1,4 @@
-# Taxonomy
+# Definitions
 
 Use these terms consistently in this skill:
 

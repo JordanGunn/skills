@@ -13,6 +13,7 @@ metadata:
     - 03_OUTPUT.md
   scripts:
     - index.sh
+    - index.ps1
   keywords:
     - index
     - skill
@@ -49,4 +50,5 @@ Read all references in `references/` before using this skill.
 
 **Directory:** `scripts/`
 
-- `index.sh`: Recursively parses SKILL.md files and generates INDEX.md
+- `index.sh`: Scans `.codex/skills/` and generates `INDEX.md` (macOS/Linux/WSL)
+- `index.ps1`: Scans `.codex/skills/` and generates `INDEX.md` (Windows)

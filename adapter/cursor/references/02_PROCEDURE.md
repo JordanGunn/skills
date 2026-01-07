@@ -4,8 +4,16 @@
 
 Run the generator script:
 
+### macOS / Linux / WSL
+
 ```bash
 .codex/skills/adapter/cursor/scripts/generate.sh
+```
+
+### Windows (PowerShell)
+
+```powershell
+.codex\skills\adapter\cursor\scripts\generate.ps1
 ```
 
 The script will:

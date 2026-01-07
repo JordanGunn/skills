@@ -13,6 +13,7 @@ metadata:
     skills:
       - plan-create
       - plan-exec
+      - plan-status
 
     # Shared resources directory for skillset assets, scripts, and references
     resources:
@@ -20,7 +21,8 @@ metadata:
       assets: []
       scripts: []
       references: 
-        - TAXONOMY.md
+        - DEFINITIONS.md
+        - FRONTMATTER.md
 
     # Chaining defaults/rules
     pipelines:
@@ -30,6 +32,7 @@ metadata:
       allowed:
         - [plan-exec]
         - [plan-create]
+        - [plan-status]
         - [plan-create, plan-exec]
 
     # Dependencies assumed or provisioned (implementation TBD)

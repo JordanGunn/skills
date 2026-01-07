@@ -45,7 +45,13 @@ Create and write:
 
 - `docs/planning/phase-<N>/plan.md`
 
-Use the template from `05_TEMPLATES.md` and fill it from the **current conversation**.
+Use the template from `05_TEMPLATES.md` and **fully populate** from the current conversation.
+
+### Content requirements
+
+- All angle-bracket placeholders (`<...>`) MUST be replaced with concrete content.
+- Purpose, Context, Constraints, and Success Criteria MUST contain real text derived from the conversation.
+- The root plan frontmatter MUST include `status: pending`.
 
 ### Rules for Sub-plan Index
 
@@ -67,13 +73,28 @@ Populate each `index.md` using the Sub-plan Index Template from `05_TEMPLATES.md
 
 Populate each task file using the Task Template from `05_TEMPLATES.md`.
 
+### Task content requirements (critical)
+
+For each task file, `plan-create` MUST fully populate:
+
+- **Focus**: Concrete description of what the task accomplishes (not a placeholder)
+- **Inputs**: Specific artifacts, files, or context required (not generic text)
+- **Work**: At least one actionable step that can be executed
+
+Leave empty (for `plan-exec` to populate):
+
+- **Output**: Will contain execution results
+- **Handoff**: Will contain instruction for next task
+
+All angle-bracket placeholders (`<...>`) MUST be replaced with real content.
+
 ### Task scoping
 
 - Derive the tasks required for each sub-plan from the conversation and list them
   in `index.md` with brief descriptions.
 - Use roman numeral ordering only (`i`, `ii`, `iii`, `iv`, `v`, ...).
 - Only create task files that are listed in the sub-plan's `index.md`.
- 
+
 ### Dependency rule
 
 The output of the last completed task in `<N>/a/` becomes an input to
@@ -83,8 +104,17 @@ The output of the last completed task in `<N>/a/` becomes an input to
 
 Confirm on disk before finishing:
 
-- `docs/planning/phase-<N>/plan.md` exists and is populated
+- `docs/planning/phase-<N>/plan.md` exists with `status: pending` frontmatter
 - Each listed sub-plan directory exists
-- Each sub-plan has a populated `index.md`
-- Each task listed in `index.md` exists and is populated
-- Root plan has a Sub-plan Index matching the created sub-plan folders
+- Each sub-plan has `index.md` with `status: pending` frontmatter
+- Each task file has `status: pending` frontmatter
+- Root plan has Sub-plan Index matching created sub-plan folders
+
+## Readiness check (required)
+
+Before declaring completion, verify:
+
+- [ ] No angle-bracket placeholders remain in any file
+- [ ] Every task's Focus section contains a concrete goal
+- [ ] Every task's Work section contains at least one actionable step
+- [ ] Output and Handoff sections are empty (reserved for `plan-exec`)
