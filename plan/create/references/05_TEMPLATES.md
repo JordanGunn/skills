@@ -48,3 +48,6 @@
 ## Handoff
 (Explicit instruction for the next subphase)
 ```
+
+If a subphase is split into roman numerals, apply the same template to each
+`i.md`, `ii.md`, `iii.md`, and `iv.md` file in that subphase folder.
