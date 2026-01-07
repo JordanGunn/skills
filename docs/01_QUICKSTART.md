@@ -1,143 +1,86 @@
-# Quickstart Guide
+# Quickstart
 
-## What are Agent Skills?
+The following section describes how to use the skills with various agentic setups.
 
-Agent Skills are structured instructions that help AI agents perform specific tasks more effectively. Each skill provides:
+## Clone the Repo
 
-- **Clear guidance** on when and how to use the skill
-- **Step-by-step procedures** for executing tasks
-- **Reference materials** for detailed information
-- **Scripts** for automation when applicable
+**Before "installing" the agent skills**, start by cloning the repo:
 
-## Repository Structure
-
-```
-skills/
-├── README.md                          # Main documentation entry point
-├── INDEX.md                           # Auto-generated skill index
-├── LICENSE                            # Repository license
-├── SPEC.md                            # Formal specification for skills
-├── docs/                              # Documentation directory
-│   ├── 01_QUICKSTART.md              # This file
-│   ├── 02_SKILLS.md                  # Individual skills reference
-│   ├── 03_SKILLSETS.md               # Skillsets concept and usage
-│   ├── 04_SCHEMAS.md                 # Schema documentation
-│   └── 05_CONTRIBUTING.md            # Contribution guidelines
-├── adapter/                           # Adapter skills for IDE/tools
-│   ├── SKILL.md                      # Adapter skillset orchestrator
-│   ├── cursor/                       # Cursor IDE adapter
-│   └── windsurf/                     # Windsurf IDE adapter
-├── index/                             # Skill indexing and discovery
-├── plan/                              # Planning and execution skillset
-│   ├── SKILL.md                      # Plan skillset orchestrator
-│   ├── .resources/                   # Shared skillset resources
-│   ├── create/                       # Plan creation skill
-│   ├── exec/                         # Plan execution skill
-│   └── status/                       # Plan status tracking skill
-└── refactor/                          # Code refactoring skillset
-    ├── SKILL.md                      # Refactor skillset orchestrator
-    ├── .resources/                   # Shared skillset resources
-    └── [member skills]/              # Individual refactor skills
-```
-
-## Using Skills
-
-### Finding Skills
-
-1. Browse the [Skills Index](../INDEX.md) for a hierarchical view
-2. Check the [Skills Reference](./02_SKILLS.md) for detailed descriptions
-3. Search by keywords in the INDEX.md keyword index
-
-### Activating a Skill
-
-Skills are activated by referencing their `SKILL.md` file. The frontmatter contains:
-- `name`: Unique identifier
-- `description`: Purpose and usage triggers
-- `metadata`: Additional properties including references, scripts, and keywords
-
-For detailed instructions, read the reference files in the skill's `references/` directory.
-
-### Running Scripts
-
-Many skills include executable scripts for automation:
-
-**macOS / Linux / WSL:**
 ```bash
-./path/to/skill/scripts/script-name.sh
+git clone https://github.com/JordanGunn/skills
 ```
 
-**Windows (PowerShell):**
+---
+
+## Codex
+
+If utilizing codex through the CLI or via an IDE extension, you have two options:
+
+### Instructions
+
+Copy the cloned directory from the `Clone the repo` section to `$HOME/.codex/skills/`.
+
+#### Unix
+
+```bash
+cp -r skills $HOME/.codex/skills/
+```
+
+#### Windows
+
 ```powershell
-.\path\to\skill\scripts\script-name.ps1
+Copy-Item -Path skills -Destination $env:USERPROFILE\.codex\skills\ -Recurse
 ```
 
-## Key Concepts
+---
 
-### Individual Skills
+## Windsurf
 
-Standalone skills that perform specific tasks. Examples:
-- `index`: Generate skill index
-- `plan-create`: Create execution plans
-- `refactor-dictionaries`: Audit dictionary usage
+### Option A: Using `adapter-windsurf` with an existing agent
 
-### Skillsets
+If you already have the skills installed with an existing agent (e.g. `codex`), simply invoke the `adapter-windsurf` skill.
 
-Orchestrator skills that coordinate multiple related skills. Examples:
-- `plan`: Coordinates plan creation and execution
-- `refactor`: Coordinates code quality audits
-- `adapter`: Coordinates IDE adapter generation
+This will autogenerate Windsurf workflows in the working directory that leverage the existing skills.
 
-See [Skillsets Documentation](./03_SKILLSETS.md) for more details.
+### Option B: Running the skill script resource
 
-### Windows Support
+If you don't have the skills setup with an existing agent, you can run the adapter script directly:
 
-Recent updates include PowerShell (`.ps1`) scripts alongside Bash (`.sh`) scripts for cross-platform support:
-- `adapter`, `index`, and `plan` skills include `.ps1` scripts
-- Scripts maintain feature parity across platforms
-
-## Quick Actions
-
-### Generate Skill Index
-
+**Unix:**
 ```bash
-# macOS / Linux / WSL
-./index/scripts/index.sh
-
-# Windows (PowerShell)
-.\index\scripts\index.ps1
+skills/adapter/windsurf/scripts/generate.sh
 ```
 
-### Create a Plan
+**Windows:**
+```powershell
+skills\adapter\windsurf\scripts\generate.ps1
+```
 
+---
+
+## Cursor
+
+### Option A: Using `adapter-cursor` with an existing agent
+
+If you already have the skills installed with an existing agent (e.g. `codex`), simply invoke the `adapter-cursor` skill.
+
+This will autogenerate Cursor commands in the working directory that leverage the existing skills.
+
+### Option B: Running the skill script resource
+
+If you don't have the skills setup with an existing agent, you can run the adapter script directly:
+
+**Unix:**
 ```bash
-# macOS / Linux / WSL
-# Follow instructions in plan/create/references/
-
-# Windows (PowerShell)
-# Follow instructions in plan/create/references/
+skills/adapter/cursor/scripts/generate.sh
 ```
 
-### Check Plan Status
-
-```bash
-# macOS / Linux / WSL
-./plan/status/scripts/status.sh
-
-# Windows (PowerShell)
-.\plan\status\scripts\status.ps1
+**Windows:**
+```powershell
+skills\adapter\cursor\scripts\generate.ps1
 ```
 
-### Generate IDE Adapters
-
-```bash
-# macOS / Linux / WSL
-./adapter/windsurf/scripts/generate.sh
-./adapter/cursor/scripts/generate.sh
-
-# Windows (PowerShell)
-.\adapter\windsurf\scripts\generate.ps1
-.\adapter\cursor\scripts\generate.ps1
-```
+---
 
 ## Next Steps
 
