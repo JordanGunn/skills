@@ -17,6 +17,7 @@ metadata:
       - refactor-inline-complexity
       - refactor-lexical-ontology
       - refactor-module-stutter
+      - refactor-squatters
       - refactor-semantic-noise
       - refactor-structural-duplication
 
@@ -35,6 +36,7 @@ metadata:
       default:
         - refactor-lexical-ontology
         - refactor-module-stutter
+        - refactor-squatters
         - refactor-semantic-noise
         - refactor-dictionaries
         - refactor-inline-complexity
@@ -50,12 +52,15 @@ metadata:
         - [refactor-module-stutter]
         - [refactor-semantic-noise]
         - [refactor-structural-duplication]
+        - [refactor-squatters]
         # Naming cluster
         - [refactor-lexical-ontology, refactor-module-stutter, refactor-semantic-noise]
         # Post-refactor hygiene
         - [refactor-import-hygiene, refactor-inline-complexity]
+        # Structure cluster
+        - [refactor-squatters, refactor-structural-duplication]
         # Full audit
-        - [refactor-lexical-ontology, refactor-module-stutter, refactor-semantic-noise, refactor-dictionaries, refactor-inline-complexity, refactor-import-hygiene, refactor-structural-duplication]
+        - [refactor-lexical-ontology, refactor-module-stutter, refactor-squatters, refactor-semantic-noise, refactor-dictionaries, refactor-inline-complexity, refactor-import-hygiene, refactor-structural-duplication]
 
     # Dependencies assumed or provisioned (implementation TBD)
     requires: []
