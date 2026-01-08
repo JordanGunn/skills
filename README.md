@@ -5,6 +5,9 @@ A collection of structured skills for AI agents to perform specific tasks effect
 ## What's New
 
 **Recent Updates (January 2026):**
+- 🩺 **New Skillset**: `doctor` - Diagnostic protocol modeling software failures as medical cases
+- 🧙 **New Skill**: `wizard` - Guided sensemaking and epistemic calibration
+- 🏠 **New Skill**: `refactor-squatters` - Detect modules occupying wrong namespace positions
 - ✨ **New Skill**: `plan-status` - Track plan execution progress with frontmatter parsing
 - 🪟 **Windows Support**: PowerShell (`.ps1`) scripts added to `adapter`, `index`, and `plan` skills
 - 📦 **Adapter Skillset**: Created `SKILLSET` for coordinating IDE adapter generation
@@ -79,6 +82,7 @@ This repository provides **agent skills** - structured instructions that help AI
 ### Skillsets (Orchestrators)
 
 - **[adapter](./adapter/SKILL.md)** - Coordinate IDE adapter generation (Windsurf, Cursor)
+- **[doctor](./doctor/SKILL.md)** - Diagnostic protocol modeling software failures as medical cases
 - **[plan](./plan/SKILL.md)** - Coordinate planning, execution, and status tracking
 - **[refactor](./refactor/SKILL.md)** - Coordinate code quality audits
 
@@ -88,13 +92,22 @@ This repository provides **agent skills** - structured instructions that help AI
 - [adapter-cursor](./adapter/cursor/SKILL.md) - Generate Cursor commands
 - [adapter-windsurf](./adapter/windsurf/SKILL.md) - Generate Windsurf workflows
 
+**Doctor Skills:**
+- [doctor-intake](./doctor/intake/SKILL.md) - Convert user's description into clinically precise intake note
+- [doctor-triage](./doctor/triage/SKILL.md) - Breadth-first hypothesis surfacing and prioritization
+- [doctor-exam](./doctor/exam/SKILL.md) - Focused evidence gathering on one suspect area
+- [doctor-treatment](./doctor/treatment/SKILL.md) - Diagnosis estimate + proposed treatment options
+
 **Index Skill:**
 - [index](./index/SKILL.md) - Generate hierarchical skill index
 
 **Plan Skills:**
 - [plan-create](./plan/create/SKILL.md) - Create execution plans
 - [plan-exec](./plan/exec/SKILL.md) - Execute existing plans
-- [plan-status](./plan/status/SKILL.md) - Track plan progress (NEW!)
+- [plan-status](./plan/status/SKILL.md) - Track plan progress
+
+**Wizard Skill:**
+- [wizard](./wizard/SKILL.md) - Guided sensemaking and epistemic calibration
 
 **Refactor Skills:**
 - [refactor-dictionaries](./refactor/dictionaries/SKILL.md) - Audit dictionary usage
@@ -103,6 +116,7 @@ This repository provides **agent skills** - structured instructions that help AI
 - [refactor-lexical-ontology](./refactor/lexical-ontology/SKILL.md) - Audit identifiers
 - [refactor-module-stutter](./refactor/module-stutter/SKILL.md) - Detect module name stutter
 - [refactor-semantic-noise](./refactor/semantic-noise/SKILL.md) - Audit semantic noise
+- [refactor-squatters](./refactor/squatters/SKILL.md) - Detect modules occupying wrong namespace positions
 - [refactor-structural-duplication](./refactor/structural-duplication/SKILL.md) - Identify structural duplication
 
 See [Skills Reference](./docs/02_SKILLS.md) for detailed descriptions and [INDEX.md](./INDEX.md) for the auto-generated index.

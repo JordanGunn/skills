@@ -113,6 +113,51 @@ Orchestrates IDE adapter generation for multiple platforms.
 
 ---
 
+### `doctor`
+
+**Path:** `doctor/`
+
+Orchestrates a diagnostic protocol that models software failures as medical cases, preventing premature action, wrong-layer fixation, and false certainty in complex codebases.
+
+**Member Skills:**
+- `doctor-intake` - Convert user's description into clinically precise intake note
+- `doctor-triage` - Breadth-first hypothesis surfacing and prioritization
+- `doctor-exam` - Focused evidence gathering on one suspect area
+- `doctor-treatment` - Diagnosis estimate + proposed treatment options
+
+**Default Pipeline:** `doctor-intake` → `doctor-triage` → `doctor-exam` → `doctor-treatment`
+
+**Allowed Combinations:**
+- `[doctor-intake]` - Just create intake note
+- `[doctor-triage]` - Just perform triage
+- `[doctor-exam]` - Just conduct examination
+- `[doctor-treatment]` - Just produce treatment plan
+- `[doctor-intake, doctor-triage]` - Intake + Triage (common starting point)
+- `[doctor-triage, doctor-exam]` - When intake already exists
+- `[doctor-exam, doctor-treatment]` - When triage already exists
+- `[doctor-intake, doctor-triage, doctor-exam, doctor-treatment]` - Full protocol
+
+**Use Case:** Diagnose complex software failures systematically by modeling them as medical cases. Prevents premature fixes and maintains epistemic clarity.
+
+**Core Philosophy:**
+1. Symptoms are not causes - The user's description is a witness statement, not ground truth
+2. Uncertainty is normal - Early confidence is usually a sign of a bad mental model
+3. Breadth before depth - Many failures originate outside the layer where they manifest
+4. Do no harm - No fixes, refactors, or executions unless explicitly requested
+5. Artifacts matter - Outputs should be structured, reviewable, and reusable
+6. Each skill must stand alone - Any skill may be invoked in isolation
+
+**Shared Resources:**
+- `ONTOLOGY.md` - Shared vocabulary (patient, symptom, witness statement, etc.)
+- `PHILOSOPHY.md` - Epistemic stance and operating principles
+- `OPERATING_RULES.md` - Final rules and constraints
+- `INTAKE_NOTE.md` - Template for intake skill output
+- `TRIAGE_REPORT.md` - Template for triage skill output
+- `EXAM_NOTE.md` - Template for exam skill output
+- `TREATMENT_NOTE.md` - Template for treatment skill output
+
+---
+
 ### `plan`
 
 **Path:** `plan/`
@@ -153,6 +198,7 @@ Orchestrates comprehensive code quality audits and structural improvements.
 - `refactor-dictionaries` - Audit dictionary usage
 - `refactor-inline-complexity` - Audit inline complexity
 - `refactor-import-hygiene` - Audit Python imports
+- `refactor-squatters` - Detect modules occupying wrong namespace positions
 - `refactor-structural-duplication` - Identify structural duplication
 
 **Default Pipeline:** 

@@ -9,37 +9,79 @@
 
 | Skill | Path | Type |
 |-------|------|------|
-| `adapter-cursor` | `adapter/cursor/` | standalone |
-| `adapter-windsurf` | `adapter/windsurf/` | standalone |
+| `adapter-cursor` | `adapter/cursor/` | member |
+| `adapter-windsurf` | `adapter/windsurf/` | member |
+| `adapter` | `adapter/` | skillset |
+| `doctor-exam` | `doctor/exam/` | member |
+| `doctor-intake` | `doctor/intake/` | member |
+| `doctor-treatment` | `doctor/treatment/` | member |
+| `doctor-triage` | `doctor/triage/` | member |
+| `doctor` | `doctor/` | skillset |
 | `index` | `index/` | standalone |
 | `plan-create` | `plan/create/` | member |
 | `plan-exec` | `plan/exec/` | member |
+| `plan-status` | `plan/status/` | member |
 | `plan` | `plan/` | skillset |
 | `refactor-dictionaries` | `refactor/dictionaries/` | member |
 | `refactor-import-hygiene` | `refactor/import-hygiene/` | member |
 | `refactor-inline-complexity` | `refactor/inline-complexity/` | member |
 | `refactor-lexical-ontology` | `refactor/lexical-ontology/` | member |
 | `refactor-module-stutter` | `refactor/module-stutter/` | member |
-| `refactor` | `refactor/` | skillset |
 | `refactor-semantic-noise` | `refactor/semantic-noise/` | member |
+| `refactor-squatters` | `refactor/squatters/` | member |
 | `refactor-structural-duplication` | `refactor/structural-duplication/` | member |
+| `refactor` | `refactor/` | skillset |
+| `wizard` | `wizard/` | standalone |
 
 ---
 
 ## Skillsets
+
+### `adapter`
+
+**Path:** `adapter/`
+> Regenerate IDE adapter files (Windsurf workflows and Cursor commands) from
+
+**Members:** `adapter-windsurf`, `adapter-cursor`
+**Default Pipeline:** adapter-windsurf adapter-cursor
+
+#### Members
+
+- **`adapter-cursor`** — Generate Cursor commands from agent skills. Creates plain markdown command files
+- **`adapter-windsurf`** — Generate Windsurf workflows from agent skills. Creates thin workflow adapters
+
+---
+
+### `doctor`
+
+**Path:** `doctor/`
+> Orchestrator skill for the `doctor` skillset. A diagnostic protocol that
+
+**Members:** `doctor-intake`, `doctor-triage`, `doctor-exam`, `doctor-treatment`
+**Default Pipeline:** doctor-intake doctor-triage-doctor-exam>doctor-treatment
+
+#### Members
+
+- **`doctor-exam`** — Conduct a focused, evidence-driven examination of ONE triaged suspect area.
+- **`doctor-intake`** — Convert the user's raw description into a clinically precise intake note
+- **`doctor-treatment`** — Produce a treatment note that combines diagnosis, confidence, supporting
+- **`doctor-triage`** — Perform breadth-first hypothesis surfacing and prioritization across all
+
+---
 
 ### `plan`
 
 **Path:** `plan/`
 > Orchestrator skill for the `plan` skillset. Dispatches to member skills in a safe, predictable order
 
-**Members:** `plan-create`, `plan-exec`
+**Members:** `plan-create`, `plan-exec`, `plan-status`
 **Default Pipeline:** plan-create plan-exec
 
 #### Members
 
 - **`plan-create`** — Materialize the current conversation into a new docs/planning/phase-N plan
 - **`plan-exec`** — Execute an existing docs/planning/phase-N plan sequentially by completing
+- **`plan-status`** — Display the execution status of a plan by parsing frontmatter metadata.
 
 ---
 
@@ -48,8 +90,8 @@
 **Path:** `refactor/`
 > Orchestrator skill for the `refactor` skillset. Dispatches to member skills
 
-**Members:** `refactor-dictionaries`, `refactor-import-hygiene`, `refactor-inline-complexity`, `refactor-lexical-ontology`, `refactor-module-stutter`, `refactor-semantic-noise`, `refactor-structural-duplication`
-**Default Pipeline:** refactor-lexical-ontology refactor-module-stutter-refactor-semantic-noise>refactor-dictionaries refactor-inline-complexity refactor-import-hygiene-refactor-structural-duplication
+**Members:** `refactor-dictionaries`, `refactor-import-hygiene`, `refactor-inline-complexity`, `refactor-lexical-ontology`, `refactor-module-stutter`, `refactor-squatters`, `refactor-semantic-noise`, `refactor-structural-duplication`
+**Default Pipeline:** refactor-lexical-ontology refactor-module-stutter-refactor-squatters>refactor-semantic-noise refactor-dictionaries refactor-inline-complexity-refactor-import-hygiene>refactor-structural-duplication
 
 #### Members
 
@@ -59,29 +101,12 @@
 - **`refactor-lexical-ontology`** — Audit identifiers and namespaces for lexical-semantic and ontological correctness.
 - **`refactor-module-stutter`** — Detect module/package name stutter in Python public APIs.
 - **`refactor-semantic-noise`** — Audit semantic noise and namespace integrity.
+- **`refactor-squatters`** — Detect squatters: modules and packages that occupy namespace positions
 - **`refactor-structural-duplication`** — Identify structurally duplicate logic (pipeline-spine duplication) across semantically distinct modu
 
 ---
 
 ## Standalone Skills
-
-### `adapter-cursor`
-
-**Path:** `adapter/cursor/`
-> Generate Cursor commands from agent skills. Creates plain markdown command files
-
-**Keywords:** `adapter`, `cursor`, `command`, `generate`
-
----
-
-### `adapter-windsurf`
-
-**Path:** `adapter/windsurf/`
-> Generate Windsurf workflows from agent skills. Creates thin workflow adapters
-
-**Keywords:** `adapter`, `windsurf`, `workflow`, `generate`, `slash command`
-
----
 
 ### `index`
 
@@ -92,85 +117,147 @@
 
 ---
 
+### `wizard`
+
+**Path:** `wizard/`
+> Guided sensemaking and epistemic calibration when intent is unstable, terminology
+
+**Keywords:** `wizard`, `sensemaking`, `calibration`, `discovery`, `epistemic`, `intent`, `taxonomy`, `refusal`
+
+---
+
 ## Keyword Index
 
 | Keyword | Skills |
 |---------|--------|
+| `TypedDict` | `refactor-dictionaries` |
 | `abstraction` | `refactor-structural-duplication` |
-| `adapter` | `adapter-cursor`, `adapter-windsurf` |
+| `adapter` | `adapter`, `adapter-cursor`, `adapter-windsurf` |
 | `agent` | `refactor-lexical-ontology` |
+| `approval` | `doctor-treatment` |
 | `artifact` | `refactor-lexical-ontology` |
+| `axis violation` | `refactor-squatters` |
+| `belief` | `doctor-intake` |
 | `boundary` | `refactor-semantic-noise` |
+| `breadth` | `doctor-triage` |
+| `calibration` | `wizard` |
 | `capability` | `index` |
+| `capture` | `doctor-intake` |
 | `catalog` | `index` |
 | `collision` | `refactor-import-hygiene` |
-| `command` | `adapter-cursor` |
+| `commands` | `adapter` |
+| `command` | `adapter`, `adapter-cursor` |
+| `common` | `refactor-squatters` |
 | `complete` | `plan-exec` |
 | `complexity` | `refactor-inline-complexity` |
+| `confidence` | `doctor-treatment` |
+| `confirm` | `doctor-exam` |
 | `convention` | `refactor-lexical-ontology` |
-| `cursor` | `adapter-cursor` |
+| `cursor` | `adapter`, `adapter-cursor` |
 | `dataclass` | `refactor-dictionaries` |
+| `diagnosis` | `doctor-treatment` |
 | `dictionary` | `refactor-dictionaries` |
 | `dict` | `refactor-dictionaries` |
-| `discovery` | `index` |
+| `discovery` | `index`, `wizard` |
 | `draft` | `plan-create` |
 | `drift` | `refactor-structural-duplication` |
 | `duplication` | `refactor-structural-duplication` |
+| `epistemic` | `wizard` |
+| `evidence` | `doctor-exam` |
+| `exam` | `doctor-exam` |
 | `execute` | `plan-exec` |
 | `extraction` | `refactor-inline-complexity`, `refactor-structural-duplication` |
+| `falsify` | `doctor-exam` |
 | `flatten` | `refactor-inline-complexity` |
+| `focused` | `doctor-exam` |
 | `from import` | `refactor-import-hygiene` |
-| `generate` | `adapter-cursor`, `adapter-windsurf` |
+| `generate` | `adapter`, `adapter-cursor`, `adapter-windsurf` |
 | `handoff` | `plan-exec` |
-| `import` | `refactor-import-hygiene` |
+| `helpers` | `refactor-squatters` |
+| `homeless concept` | `refactor-squatters` |
+| `hypothesis` | `doctor-exam`, `doctor-triage` |
 | `imports` | `refactor-import-hygiene` |
+| `import` | `refactor-import-hygiene` |
 | `index` | `index` |
+| `instructions` | `adapter` |
+| `instruction` | `adapter` |
+| `intake` | `doctor-intake` |
+| `integrity` | `refactor-squatters` |
+| `intent` | `wizard` |
 | `intermediate` | `refactor-inline-complexity` |
+| `investigation` | `doctor-exam` |
+| `layer bleeding` | `refactor-squatters` |
 | `lexical` | `refactor-lexical-ontology` |
+| `likelihood` | `doctor-triage` |
 | `lookup` | `index` |
+| `misplaced` | `refactor-squatters` |
 | `module` | `refactor-module-stutter` |
-| `namespace` | `refactor-import-hygiene`, `refactor-semantic-noise` |
+| `namespace` | `refactor-import-hygiene`, `refactor-semantic-noise`, `refactor-squatters` |
 | `naming` | `refactor-lexical-ontology`, `refactor-module-stutter` |
 | `nested` | `refactor-inline-complexity` |
 | `noise` | `refactor-semantic-noise` |
+| `normalize` | `doctor-intake` |
+| `observation` | `doctor-intake` |
 | `ontology` | `refactor-lexical-ontology` |
+| `options` | `doctor-treatment` |
 | `package` | `refactor-module-stutter` |
 | `perform` | `index` |
 | `phase` | `plan-create`, `plan-exec` |
 | `pipeline` | `refactor-structural-duplication` |
 | `planning` | `plan-create` |
-| `plan` | `plan-create`, `plan-exec` |
+| `plan` | `plan-create`, `plan-exec`, `plan-status` |
 | `prefix` | `refactor-module-stutter`, `refactor-semantic-noise` |
+| `prioritization` | `doctor-triage` |
 | `process` | `refactor-lexical-ontology` |
+| `progress` | `plan-status` |
+| `proposal` | `doctor-treatment` |
 | `public API` | `refactor-dictionaries`, `refactor-module-stutter` |
 | `readability` | `refactor-inline-complexity` |
 | `redundant` | `refactor-module-stutter`, `refactor-semantic-noise` |
+| `refusal` | `wizard` |
 | `registry` | `index` |
+| `risk` | `doctor-treatment` |
 | `roman numerals` | `plan-exec` |
+| `semantic diffusion` | `refactor-squatters` |
 | `semantic` | `refactor-lexical-ontology`, `refactor-semantic-noise` |
+| `sensemaking` | `wizard` |
 | `shadowing` | `refactor-import-hygiene` |
+| `sibling` | `refactor-squatters` |
 | `sketch` | `plan-create` |
-| `skill` | `index` |
 | `skillset` | `index` |
-| `skills` | `index` |
+| `skills` | `adapter`, `index` |
+| `skill` | `adapter`, `index` |
 | `slash command` | `adapter-windsurf` |
 | `spine` | `refactor-structural-duplication` |
+| `squatters` | `refactor-squatters` |
+| `status` | `plan-status` |
 | `structural` | `refactor-structural-duplication` |
-| `stutter` | `refactor-module-stutter` |
-| `sub-plan` | `plan-create`, `plan-exec` |
+| `stutter` | `refactor-module-stutter`, `refactor-squatters` |
 | `sub-plans` | `plan-create` |
-| `subtask` | `plan-create`, `plan-exec` |
+| `sub-plan` | `plan-create`, `plan-exec` |
 | `subtasks` | `plan-create`, `plan-exec` |
+| `subtask` | `plan-create`, `plan-exec` |
 | `suffix` | `refactor-lexical-ontology`, `refactor-semantic-noise` |
 | `symbol` | `refactor-import-hygiene` |
+| `symptoms` | `doctor-intake` |
+| `sync` | `adapter` |
 | `task file` | `plan-exec` |
-| `task` | `plan-create`, `plan-exec` |
 | `tasks` | `plan-create`, `plan-exec` |
-| `taxonomy` | `refactor-semantic-noise` |
-| `TypedDict` | `refactor-dictionaries` |
+| `task` | `plan-create`, `plan-exec` |
+| `taxonomy` | `refactor-semantic-noise`, `wizard` |
+| `tracking` | `plan-status` |
+| `treatment` | `doctor-treatment` |
+| `triage` | `doctor-triage` |
 | `type safety` | `refactor-dictionaries` |
 | `typing` | `refactor-dictionaries` |
 | `unification` | `refactor-structural-duplication` |
+| `utility dump` | `refactor-squatters` |
+| `utils` | `refactor-squatters` |
 | `variable` | `refactor-inline-complexity` |
-| `windsurf` | `adapter-windsurf` |
-| `workflow` | `adapter-windsurf` |
+| `windsurf` | `adapter`, `adapter-windsurf` |
+| `witness` | `doctor-intake` |
+| `wizard` | `wizard` |
+| `workflows` | `adapter` |
+| `workflow` | `adapter`, `adapter-windsurf` |
+| `wrong home` | `refactor-squatters` |
+| `zones` | `doctor-triage` |

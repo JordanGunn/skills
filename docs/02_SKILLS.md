@@ -38,6 +38,77 @@ Generate Windsurf workflows from agent skills. Creates thin workflow adapters th
 
 ---
 
+## Doctor Skills
+
+Diagnostic protocol skills for modeling software failures as medical cases.
+
+### `doctor-intake`
+
+**Path:** `doctor/intake/`
+
+Convert the user's raw description into a clinically precise intake note. First step in the doctor protocol for establishing ground truth.
+
+**Keywords:** `intake`, `diagnosis`, `medical`, `protocol`, `investigation`, `symptoms`
+
+**References:**
+- `01_PURPOSE.md`
+- `02_EPISTEMIC_STANCE.md`
+- `03_BEHAVIOR.md`
+- `04_OUTPUT.md`
+
+---
+
+### `doctor-triage`
+
+**Path:** `doctor/triage/`
+
+Perform breadth-first hypothesis surfacing and prioritization across all plausible failure points. Second step in the doctor protocol.
+
+**Keywords:** `triage`, `hypothesis`, `prioritization`, `diagnosis`, `investigation`
+
+**References:**
+- `01_PURPOSE.md`
+- `02_SCOPE.md`
+- `03_BEHAVIOR.md`
+- `04_OUTPUT.md`
+
+**Scripts:**
+- `evidence.sh` (macOS/Linux/WSL)
+
+---
+
+### `doctor-exam`
+
+**Path:** `doctor/exam/`
+
+Conduct a focused, evidence-driven examination of ONE triaged suspect area. Third step in the doctor protocol.
+
+**Keywords:** `exam`, `examination`, `evidence`, `diagnosis`, `investigation`
+
+**References:**
+- `01_PURPOSE.md`
+- `02_SCOPE.md`
+- `03_BEHAVIOR.md`
+- `04_OUTPUT.md`
+
+---
+
+### `doctor-treatment`
+
+**Path:** `doctor/treatment/`
+
+Produce a treatment note that combines diagnosis, confidence, supporting evidence, and multiple treatment options. Final step in the doctor protocol.
+
+**Keywords:** `treatment`, `diagnosis`, `remediation`, `options`, `confidence`
+
+**References:**
+- `01_PURPOSE.md`
+- `02_DIAGNOSIS.md`
+- `03_OPTIONS.md`
+- `04_OUTPUT.md`
+
+---
+
 ## Index Skill
 
 Skill indexing and discovery functionality.
@@ -239,6 +310,29 @@ Audit semantic noise and namespace integrity.
 
 ---
 
+### `refactor-squatters`
+
+**Path:** `refactor/squatters/`
+
+Detect squatters: modules and packages that occupy namespace positions they do not semantically own. Identifies utility dumps, stuttery siblings, axis violations, layer bleeding, and semantic diffusion.
+
+**Keywords:** `squatters`, `namespace`, `integrity`, `wrong home`, `misplaced`, `utility dump`, `common`, `helpers`, `utils`, `stutter`, `sibling`, `axis violation`, `layer bleeding`, `semantic diffusion`, `homeless concept`
+
+**References:**
+- `01_GOAL.md`
+- `02_DEFINITIONS.md`
+- `03_INVARIANTS.md`
+- `04_HEURISTICS.md`
+- `05_PROCEDURE.md`
+- `06_REMEDIATION.md`
+- `07_OUTPUT.md`
+
+**Scripts:**
+- `detect.sh` (macOS/Linux/WSL)
+- `detect.ps1` (Windows)
+
+---
+
 ### `refactor-structural-duplication`
 
 **Path:** `refactor/structural-duplication/`
@@ -254,6 +348,30 @@ Identify structurally duplicate logic (pipeline-spine duplication) across semant
 - `04_SCOPE.md`
 - `05_CHECKS.md`
 - `06_OUTPUT.md`
+
+---
+
+## Wizard Skill
+
+Guided sensemaking and epistemic calibration for unclear or unstable situations.
+
+### `wizard`
+
+**Path:** `wizard/`
+
+Guided sensemaking and epistemic calibration when intent is unstable, terminology is inadequate, or it is unclear whether automation should exist.
+
+**Keywords:** `wizard`, `sensemaking`, `calibration`, `discovery`, `epistemic`, `intent`, `taxonomy`, `refusal`
+
+**References:**
+- `00_INSTRUCTIONS.md`
+- `01_INTENT.md`
+- `02_TAXONOMY.md`
+- `03_PROTOCOL.md`
+- `04_WORKING_MODEL.md`
+- `05_TERMINAL_OUTCOMES.md`
+- `06_ANTI_SKILLS.md`
+- `07_INTERACTION.md`
 
 ---
 
