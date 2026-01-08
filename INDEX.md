@@ -40,7 +40,7 @@
 ### `adapter`
 
 **Path:** `adapter/`
-> Regenerate IDE adapter files (Windsurf workflows and Cursor commands) from
+> Regenerate IDE adapter files (Windsurf workflows and Cursor commands) from agent skills.
 
 **Members:** `adapter-windsurf`, `adapter-cursor`
 **Default Pipeline:** adapter-windsurf adapter-cursor
@@ -55,17 +55,17 @@
 ### `doctor`
 
 **Path:** `doctor/`
-> Orchestrator skill for the `doctor` skillset. A diagnostic protocol that
+> Orchestrator skill for the `doctor` skillset. A diagnostic protocol that models software failures as medical cases.
 
 **Members:** `doctor-intake`, `doctor-triage`, `doctor-exam`, `doctor-treatment`
-**Default Pipeline:** doctor-intake doctor-triage-doctor-exam>doctor-treatment
+**Default Pipeline:** doctor-intake doctor-triage doctor-exam doctor-treatment
 
 #### Members
 
 - **`doctor-exam`** — Conduct a focused, evidence-driven examination of ONE triaged suspect area.
-- **`doctor-intake`** — Convert the user's raw description into a clinically precise intake note
-- **`doctor-treatment`** — Produce a treatment note that combines diagnosis, confidence, supporting
-- **`doctor-triage`** — Perform breadth-first hypothesis surfacing and prioritization across all
+- **`doctor-intake`** — Convert the user's raw description into a clinically precise intake note.
+- **`doctor-treatment`** — Produce a treatment note that combines diagnosis, confidence, supporting evidence, and multiple treatment options.
+- **`doctor-triage`** — Perform breadth-first hypothesis surfacing and prioritization across all plausible failure points.
 
 ---
 
@@ -88,10 +88,10 @@
 ### `refactor`
 
 **Path:** `refactor/`
-> Orchestrator skill for the `refactor` skillset. Dispatches to member skills
+> Orchestrator skill for the `refactor` skillset. Dispatches to member skills in recommended order.
 
 **Members:** `refactor-dictionaries`, `refactor-import-hygiene`, `refactor-inline-complexity`, `refactor-lexical-ontology`, `refactor-module-stutter`, `refactor-squatters`, `refactor-semantic-noise`, `refactor-structural-duplication`
-**Default Pipeline:** refactor-lexical-ontology refactor-module-stutter-refactor-squatters>refactor-semantic-noise refactor-dictionaries refactor-inline-complexity-refactor-import-hygiene>refactor-structural-duplication
+**Default Pipeline:** refactor-lexical-ontology refactor-module-stutter refactor-squatters refactor-semantic-noise refactor-dictionaries refactor-inline-complexity refactor-import-hygiene refactor-structural-duplication
 
 #### Members
 
@@ -101,8 +101,8 @@
 - **`refactor-lexical-ontology`** — Audit identifiers and namespaces for lexical-semantic and ontological correctness.
 - **`refactor-module-stutter`** — Detect module/package name stutter in Python public APIs.
 - **`refactor-semantic-noise`** — Audit semantic noise and namespace integrity.
-- **`refactor-squatters`** — Detect squatters: modules and packages that occupy namespace positions
-- **`refactor-structural-duplication`** — Identify structurally duplicate logic (pipeline-spine duplication) across semantically distinct modu
+- **`refactor-squatters`** — Detect squatters: modules and packages that occupy namespace positions they do not semantically own.
+- **`refactor-structural-duplication`** — Identify structurally duplicate logic (pipeline-spine duplication) across semantically distinct modules.
 
 ---
 
@@ -120,7 +120,7 @@
 ### `wizard`
 
 **Path:** `wizard/`
-> Guided sensemaking and epistemic calibration when intent is unstable, terminology
+> Guided sensemaking and epistemic calibration when intent is unstable, terminology is inadequate, or it is unclear whether automation should exist.
 
 **Keywords:** `wizard`, `sensemaking`, `calibration`, `discovery`, `epistemic`, `intent`, `taxonomy`, `refusal`
 
