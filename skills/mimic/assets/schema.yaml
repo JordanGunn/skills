@@ -1,0 +1,148 @@
+# Persona Schema
+# Authoritative definition for persona specifications.
+# Parsed to generate and validate personality specs in assets/registry/.
+
+version: 1
+name: persona
+
+fields:
+  identity:
+    type: string
+    required: true
+    max_chars: 280
+    description: |
+      Core definition of the persona in one or two sentences.
+      Describes the archetype, primary behavior, and key constraint.
+      This is the persona's essential truth—everything else derives from it.
+
+  rules:
+    type: object
+    required: true
+    description: Behavioral constraints that govern the persona.
+    properties:
+      always:
+        type: list
+        required: true
+        min_items: 1
+        max_items: 5
+        item_max_chars: 120
+        description: |
+          Core traits that MUST always be present.
+          These cannot be compromised regardless of context.
+
+      never:
+        type: list
+        required: true
+        min_items: 1
+        max_items: 5
+        item_max_chars: 120
+        description: |
+          Explicit prohibitions for this persona.
+          What the persona must NEVER do under any circumstances.
+
+  bits:
+    type: list
+    required: true
+    min_items: 1
+    max_items: 8
+    description: |
+      Repeatable patterns that define the persona's signature moves.
+      Each bit is a distinct, memorable behavior the persona exhibits.
+    item_schema:
+      name:
+        type: string
+        required: true
+        max_chars: 40
+        description: Short identifier for the bit.
+
+      description:
+        type: string
+        required: true
+        max_chars: 200
+        description: What the bit does and how it manifests.
+
+      trigger:
+        type: string
+        required: false
+        max_chars: 100
+        description: Optional context or situation that activates this bit.
+
+      frequency:
+        type: enum
+        required: true
+        values: [never, sometimes, always]
+        description: |
+          How often this bit should appear.
+          - never: Only when explicitly appropriate
+          - sometimes: When context suggests it
+          - always: Every response should include this
+
+      example:
+        type: string
+        required: false
+        max_chars: 200
+        description: Optional example of the bit in action.
+
+  hooks:
+    type: object
+    required: false
+    description: |
+      Lifecycle behaviors for persona activation and dismissal.
+      Describes what the persona does, not prescriptive phrases.
+    properties:
+      init:
+        type: string
+        required: false
+        max_chars: 200
+        description: |
+          How the persona signals activation.
+          Describe the behavior, not the exact words.
+
+      exit:
+        type: string
+        required: false
+        max_chars: 200
+        description: |
+          How the persona signals dismissal.
+          Describe the behavior, not the exact words.
+
+  budget:
+    type: string
+    required: false
+    max_chars: 300
+    description: |
+      Guidance on overlay density and restraint.
+      Describes how much persona flavor to apply per response.
+      Higher density = more theatrical, lower = more subtle.
+      Leave undefined for agent interpretation.
+
+  antipatterns:
+    type: list
+    required: false
+    max_items: 5
+    item_max_chars: 200
+    description: |
+      Examples of INCORRECT persona application.
+      Shows what NOT to do: overdone examples, guardrail violations, stale usage.
+
+  lexicon:
+    type: list
+    required: false
+    max_items: 20
+    description: |
+      Word substitution map for persona-specific vocabulary.
+      Each entry maps a normal word to possible replacements.
+    item_schema:
+      word:
+        type: string
+        required: true
+        max_chars: 30
+        description: The standard word to replace.
+
+      replacements:
+        type: list
+        required: true
+        min_items: 1
+        max_items: 5
+        item_max_chars: 40
+        description: List of persona-flavored alternatives.

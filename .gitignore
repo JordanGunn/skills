@@ -1,0 +1,44 @@
+### Generated files
+.codex/skills/INDEX.md
+
+### Agents
+.codex/
+.cursor/
+.windsurf/
+
+### IDE
+.vscode/
+.idea/
+
+### OS
+.DS_Store
+Thumbs.db
+
+### Logs
+*.log
+
+### Temporary files
+*.tmp
+*.temp
+
+### Backup files
+*.bak
+*.backup
+
+### Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+### Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
