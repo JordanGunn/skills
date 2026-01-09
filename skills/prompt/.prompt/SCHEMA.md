@@ -1,6 +1,6 @@
 # Canonical Prompt Artifact Schema
 
-The canonical prompt artifact is stored at `.codex/skills/prompt/.prompt/active.yaml`.
+The canonical prompt artifact is stored at `.prompt-forge/active.yaml`.
 
 ## Schema Definition
 
@@ -54,17 +54,17 @@ constraints:
 
 ## Field Requirements
 
-| Field | Required | Notes |
-|-------|----------|-------|
-| `status` | Yes | Must be `drafting` or `ready` |
-| `updated_at` | Yes | ISO 8601 format |
-| `title` | Yes | Short, descriptive |
-| `intent_summary` | Yes | 1-3 lines |
-| `refined_prompt` | Yes | Verbatim execution text |
-| `assumptions` | Yes | May be empty list |
-| `open_questions` | Yes | Must be empty for `ready` status |
-| `constraints.must` | Yes | May be empty list |
-| `constraints.must_not` | Yes | May be empty list |
+| Field              | Required | Notes                               |
+| ------------------ | -------- | ---------------------------------- |
+| `status`           | Yes      | Must be `drafting` or `ready`      |
+| `updated_at`       | Yes      | ISO 8601 format                    |
+| `title`            | Yes      | Short, descriptive                 |
+| `intent_summary`   | Yes      | 1-3 lines                          |
+| `refined_prompt`   | Yes      | Verbatim execution text            |
+| `assumptions`      | Yes      | May be empty list                  |
+| `open_questions`   | Yes      | Must be empty for `ready` status   |
+| `constraints.must` | Yes      | May be empty list                  |
+| `constraints.must_not` | Yes  | May be empty list                  |
 
 ## Invariants
 

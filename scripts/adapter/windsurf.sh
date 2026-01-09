@@ -3,15 +3,15 @@
 # windsurf.sh — Generate Windsurf workflows from agent skills
 #
 # Usage: ./windsurf.sh [skills_dir] [workflows_dir]
-#   skills_dir:   Directory containing skills (default: .codex/skills)
+#   skills_dir:   Directory containing skills (default: skills/)
 #   workflows_dir: Output directory for workflows (default: .windsurf/workflows)
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-SKILLS_DIR="${1:-$REPO_ROOT/.codex/skills}"
+SKILLS_DIR="${1:-$REPO_ROOT/skills}"
 WORKFLOWS_DIR="${2:-$REPO_ROOT/.windsurf/workflows}"
 
 # Ensure output directory exists
@@ -152,11 +152,11 @@ generate_workflow() {
         echo ""
         echo "# ${name}"
         echo ""
-        echo "This workflow delegates to the agent skill at \`.codex/skills/${skill_dir}/\`."
+        echo "This workflow delegates to the agent skill at \`skills/${skill_dir}/\`."
         echo ""
         echo "## Instructions"
         echo ""
-        echo "1. Read the skill manifest: \`.codex/skills/${skill_dir}/SKILL.md\`"
+        echo "1. Read the skill manifest: \`skills/${skill_dir}/SKILL.md\`"
         echo "2. Read all references listed in \`metadata.references\` in order:"
         if [[ -n "$refs" ]]; then
             echo "$refs"
@@ -172,7 +172,7 @@ generate_workflow() {
         echo ""
         echo "## Skill Location"
         echo ""
-        echo "- **Path:** \`.codex/skills/${skill_dir}/\`"
+        echo "- **Path:** \`skills/${skill_dir}/\`"
         echo "- **References:** \`references/\`"
         if [[ -n "$has_scripts" ]]; then
             echo "- **Scripts:** \`scripts/\`"
@@ -201,10 +201,10 @@ generate_workflow() {
         if [[ -n "$keywords" ]]; then
             echo "## Keywords"
             echo ""
-            echo "\`${keywords}\`"
-            echo ""
+            printf '%s' "\`${keywords}\`"
         fi
     } > "$workflow_file"
+    echo "" >> "$workflow_file"
     
     echo "Generated: $workflow_file"
 }

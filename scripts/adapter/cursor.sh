@@ -3,15 +3,15 @@
 # cursor.sh — Generate Cursor commands from agent skills
 #
 # Usage: ./cursor.sh [skills_dir] [commands_dir]
-#   skills_dir:   Directory containing skills (default: .codex/skills)
+#   skills_dir:   Directory containing skills (default: skills/)
 #   commands_dir: Output directory for commands (default: .cursor)
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-SKILLS_DIR="${1:-$REPO_ROOT/.codex/skills}"
+SKILLS_DIR="${1:-$REPO_ROOT/skills}"
 COMMANDS_DIR="${2:-$REPO_ROOT/.cursor/commands}"
 
 # Ensure output directory exists
@@ -146,7 +146,7 @@ generate_command() {
         echo ""
         echo "## Instructions"
         echo ""
-        echo "1. Read the skill manifest: \`.codex/skills/${skill_dir}/SKILL.md\`"
+        echo "1. Read the skill manifest: \`skills/${skill_dir}/SKILL.md\`"
         echo "2. Read all references in order:"
         
         # List references
@@ -165,7 +165,7 @@ generate_command() {
         echo ""
         echo "## Skill Location"
         echo ""
-        echo "**Path:** \`.codex/skills/${skill_dir}/\`"
+        echo "**Path:** \`skills/${skill_dir}/\`"
         echo ""
         
         # Add skillset-specific info
@@ -187,10 +187,10 @@ generate_command() {
         if [[ -n "$keywords" ]]; then
             echo "## Keywords"
             echo ""
-            echo "${keywords}"
-            echo ""
+            printf '%s' "${keywords}"
         fi
     } > "$command_file"
+    echo "" >> "$command_file"
     
     echo "Generated: $command_file"
 }

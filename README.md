@@ -5,18 +5,19 @@ A collection of structured skills for AI agents to perform specific tasks effect
 ## What's New
 
 **Recent Updates (January 2026):**
+
 - ✨ **New Skill**: `plan-status` - Track plan execution progress with frontmatter parsing
 - 🪟 **Windows Support**: PowerShell (`.ps1`) scripts added to `adapter`, `index`, and `plan` skills
 - 📦 **Adapter Skillset**: Created `SKILLSET` for coordinating IDE adapter generation
 - 📊 **Plan Status Tracking**: Added frontmatter status values (`pending`, `in_progress`, `complete`)
 - 🔄 **Enhanced Plan Skills**: All plan skills now support artifact status parsing
 
-See [CHANGELOG.md](#) for complete release history.
+See [CHANGELOG.md](./CHANGELOG.md) for complete release history.
 
 ## Quick Links
 
-- 📚 [Skills Reference](./docs/02_SKILLS.md) - Browse all available skills
-- 🎯 [Skillsets](./docs/03_SKILLSETS.md) - Learn about orchestrator skills
+- 📚 [Skills Reference](./docs/SKILLS.md) - Browse all available skills
+- 🎯 [Skillsets](./docs/SKILLSETS.md) - Learn about orchestrator skills
 - 📋 [INDEX.md](./INDEX.md) - Auto-generated skill index with keywords
 - 📖 [Formal Specification](./SPEC.md) - Official Agent Skills format
 
@@ -41,7 +42,7 @@ This repository provides **agent skills** - structured instructions that help AI
 
 ### Getting Started
 
-- **[Quickstart Guide](./docs/01_QUICKSTART.md)** - Get up and running quickly
+- **[Quickstart Guide](./docs/QUICKSTART.md)** - Get up and running quickly
   - What are Agent Skills?
   - Repository structure overview
   - Using skills and running scripts
@@ -49,26 +50,26 @@ This repository provides **agent skills** - structured instructions that help AI
 
 ### Reference Documentation
 
-- **[Skills Reference](./docs/02_SKILLS.md)** - Complete guide to individual skills
+- **[Skills Reference](./docs/SKILLS.md)** - Complete guide to individual skills
   - Adapter skills (Cursor, Windsurf)
   - Index skill (skill discovery)
   - Plan skills (create, exec, status)
   - Refactor skills (code quality audits)
   - Keyword index for quick lookup
 
-- **[Skillsets](./docs/03_SKILLSETS.md)** - Understanding orchestrator skills
+- **[Skillsets](./docs/SKILLSETS.md)** - Understanding orchestrator skills
   - What are skillsets?
   - How skillsets work
   - Available skillsets (adapter, plan, refactor)
   - Creating new skillsets
 
-- **[Schema Documentation](./docs/04_SCHEMAS.md)** - Technical reference
+- **[Schema Documentation](./docs/schema/SKILL.md)** - Technical reference
   - SKILL.md frontmatter schema
   - SKILLSET custom schema
   - Plan artifact frontmatter
   - Examples and validation
 
-- **[Contributing Guidelines](./docs/05_CONTRIBUTING.md)** - Add your own skills
+- **[Contributing Guidelines](./CONTRIBUTING.md)** - Add your own skills
   - Adding individual skills
   - Creating skillsets
   - Schema requirements
@@ -85,18 +86,22 @@ This repository provides **agent skills** - structured instructions that help AI
 ### Individual Skills
 
 **Adapter Skills:**
+
 - [adapter-cursor](./adapter/cursor/SKILL.md) - Generate Cursor commands
 - [adapter-windsurf](./adapter/windsurf/SKILL.md) - Generate Windsurf workflows
 
 **Index Skill:**
+
 - [index](./index/SKILL.md) - Generate hierarchical skill index
 
 **Plan Skills:**
+
 - [plan-create](./plan/create/SKILL.md) - Create execution plans
 - [plan-exec](./plan/exec/SKILL.md) - Execute existing plans
 - [plan-status](./plan/status/SKILL.md) - Track plan progress (NEW!)
 
 **Refactor Skills:**
+
 - [refactor-dictionaries](./refactor/dictionaries/SKILL.md) - Audit dictionary usage
 - [refactor-import-hygiene](./refactor/import-hygiene/SKILL.md) - Audit Python imports
 - [refactor-inline-complexity](./refactor/inline-complexity/SKILL.md) - Audit inline complexity
@@ -105,39 +110,29 @@ This repository provides **agent skills** - structured instructions that help AI
 - [refactor-semantic-noise](./refactor/semantic-noise/SKILL.md) - Audit semantic noise
 - [refactor-structural-duplication](./refactor/structural-duplication/SKILL.md) - Identify structural duplication
 
-See [Skills Reference](./docs/02_SKILLS.md) for detailed descriptions and [INDEX.md](./INDEX.md) for the auto-generated index.
+See [Skills Reference](./docs/SKILLS.md) for detailed descriptions and [INDEX.md](./INDEX.md) for the auto-generated index.
 
 ## Quick Start
 
-### Install and Run Scripts
+### Install Skills
 
 **macOS / Linux / WSL:**
+
 ```bash
-# Generate skill index
-./index/scripts/index.sh
-
-# Check plan status
-./plan/status/scripts/status.sh
-
-# Generate IDE adapters
-./adapter/windsurf/scripts/generate.sh
-./adapter/cursor/scripts/generate.sh
+./scripts/install/unix/windsurf.sh  # Install for Windsurf
+./scripts/install/unix/cursor.sh    # Install for Cursor
+./scripts/index/index.sh            # Generate skill index
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
-# Generate skill index
-.\index\scripts\index.ps1
-
-# Check plan status
-.\plan\status\scripts\status.ps1
-
-# Generate IDE adapters
-.\adapter\windsurf\scripts\generate.ps1
-.\adapter\cursor\scripts\generate.ps1
+.\scripts\install\windows\windsurf.ps1  # Install for Windsurf
+.\scripts\install\windows\cursor.ps1    # Install for Cursor
+.\scripts\index\index.ps1               # Generate skill index
 ```
 
-See [Quickstart Guide](./docs/01_QUICKSTART.md) for more examples.
+See [Quickstart Guide](./docs/QUICKSTART.md) for more details.
 
 ## Understanding Skills
 
@@ -145,7 +140,7 @@ See [Quickstart Guide](./docs/01_QUICKSTART.md) for more examples.
 
 Each skill follows a canonical structure:
 
-```
+```text
 skill-name/
 ├── SKILL.md              # Frontmatter only (no body content)
 ├── references/           # Detailed documentation
@@ -183,17 +178,17 @@ We welcome contributions! Before adding a new skill:
 2. **Review the [Contributing Guidelines](./docs/05_CONTRIBUTING.md)** for detailed instructions
 3. **Follow the schema requirements** for skills or skillsets
 4. **Test thoroughly** including cross-platform scripts
-5. **Regenerate the index** using `./index/scripts/index.sh` or `.\index\scripts\index.ps1`
+5. **Regenerate the index** using `./scripts/index/index.sh` or `.\scripts\index\index.ps1`
 
 ### Key Requirements
 
 - ✅ `SKILL.md` must contain **only frontmatter** (no body content)
-- ✅ Skills must follow the [canonical schema](./docs/04_SCHEMAS.md)
+- ✅ Skills must follow the [canonical schema](./docs/schema/SKILL.md)
 - ✅ Skillsets must use the strict `metadata.skillset` schema
 - ✅ Scripts should support both Unix (`.sh`) and Windows (`.ps1`)
 - ✅ Reference files must follow `NN_TOPIC.md` naming convention
 
-See the [Contributing Guidelines](./docs/05_CONTRIBUTING.md) for complete details.
+See the [Contributing Guidelines](./CONTRIBUTING.md) for complete details.
 
 ## License
 

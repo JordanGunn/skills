@@ -2,7 +2,7 @@
 
 ## Step 1: Load Artifact
 
-1. Read `.codex/skills/prompt/.prompt/active.yaml`
+1. Read `.prompt-forge/active.yaml`
 2. Parse YAML content
 3. Verify all preconditions (see `01_PRECONDITIONS.md`)
 
@@ -39,28 +39,32 @@ This ensures transparency and allows last-moment abort.
 
 1. Generate execution receipt:
 
-```yaml
-executed_at: <ISO 8601 timestamp>
-title: <copied from prompt artifact>
-intent_summary: <copied from prompt artifact>
-refined_prompt: |
-  <verbatim copy>
-result_summary: <brief description of what was accomplished>
-```
+    ```yaml
+    executed_at: <ISO 8601 timestamp>
+    title: <copied from prompt artifact>
+    intent_summary: <copied from prompt artifact>
+    refined_prompt: |
+      <verbatim copy>
+    result_summary: <brief description of what was accomplished>
+    ```
 
-2. Write receipt to `.codex/skills/prompt/.prompt/receipts/<timestamp>-<hash>.yaml`
+2. Write receipt to `.prompt-forge/receipts/<timestamp>-<hash>.yaml`
 
-3. **Delete the canonical prompt artifact** (`.codex/skills/prompt/.prompt/active.yaml`)
+3. **Delete the canonical prompt artifact** (`.prompt-forge/active.yaml`)
 
 4. Confirm to user:
-> "Execution complete. The prompt has been cleared. Receipt saved to `receipts/<filename>`."
+
+  > "Execution complete. The prompt has been cleared. Receipt saved to `.prompt-forge/receipts/<filename>`."
 
 ### On Failure
 
 1. Do NOT delete the canonical prompt artifact.
+
 2. Optionally annotate the artifact with failure details.
+
 3. Inform user:
-> "Execution failed: <reason>. The prompt remains active. You can retry or return to `prompt-forge` to adjust."
+
+  > "Execution failed: [reason]. The prompt remains active. You can retry or return to `prompt-forge` to adjust."
 
 ## Step 5: Verify Clean State
 

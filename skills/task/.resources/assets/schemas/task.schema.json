@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task.schema.json",
+  "title": "Task Directory Schema",
+  "description": "Schema describing the task directory structure",
+  "type": "object",
+  "required": ["directory_name", "files"],
+  "properties": {
+    "directory_name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$",
+      "description": "Task directory name (must match task id)"
+    },
+    "files": {
+      "type": "object",
+      "required": ["00_TASK.md"],
+      "properties": {
+        "00_TASK.md": {
+          "type": "object",
+          "required": ["required", "description"],
+          "properties": {
+            "required": { "type": "boolean", "const": true },
+            "description": { "type": "string" }
+          }
+        },
+        "01_CONTEXT.md": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "boolean", "const": false },
+            "description": { "type": "string" }
+          }
+        },
+        "02_NOTES.md": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "boolean", "const": false },
+            "description": { "type": "string" }
+          }
+        },
+        "03_ACTIONS.md": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "boolean", "const": false },
+            "description": { "type": "string" }
+          }
+        },
+        "99_STATE.md": {
+          "type": "object",
+          "properties": {
+            "required": { "type": "boolean", "const": false },
+            "description": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "directory_name": "implement-auth",
+      "files": {
+        "00_TASK.md": {
+          "required": true,
+          "description": "Canonical frontmatter + canonical intent (Goal, Acceptance, Constraints, Dependencies)"
+        },
+        "01_CONTEXT.md": {
+          "required": false,
+          "description": "Background context, research, related work"
+        },
+        "02_NOTES.md": {
+          "required": false,
+          "description": "Working notes, thoughts, discoveries"
+        },
+        "03_ACTIONS.md": {
+          "required": false,
+          "description": "Append-only execution log of actions taken"
+        },
+        "99_STATE.md": {
+          "required": false,
+          "description": "Derived state computed by scripts (staleness, hash status, eligibility)"
+        }
+      }
+    }
+  ]
+}

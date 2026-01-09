@@ -17,11 +17,11 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 if ($ProjectRoot) {
     $ResolvedRoot = Resolve-Path $ProjectRoot
 } else {
-    # Navigate up from .codex\scripts\install\windows\ to project root
-    $ResolvedRoot = Resolve-Path (Join-Path $ScriptDir "..\..\..\..")
+    # Navigate up from scripts\install\windows\ to project root
+    $ResolvedRoot = Resolve-Path (Join-Path $ScriptDir "..\..\..")
 }
 
-$AdapterScript = Join-Path $ResolvedRoot ".codex\scripts\adapter\cursor.ps1"
+$AdapterScript = Join-Path $ResolvedRoot "scripts\adapter\cursor.ps1"
 
 if (-not (Test-Path $AdapterScript)) {
     Write-Error "Adapter script not found: $AdapterScript"

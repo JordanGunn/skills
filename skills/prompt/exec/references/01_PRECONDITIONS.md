@@ -6,7 +6,7 @@ All preconditions must be satisfied before execution proceeds.
 
 ### 1. Canonical artifact exists
 
-The file `.codex/skills/prompt/.prompt/active.yaml` must exist and be valid YAML.
+The file `.prompt-forge/active.yaml` must exist and be valid YAML.
 
 **If missing**: Abort with message:
 > "No active prompt found. Use `prompt-forge` to create one first."

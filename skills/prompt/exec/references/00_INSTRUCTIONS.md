@@ -3,7 +3,7 @@
 ## Initialize
 
 1. Read all reference files listed in `metadata.references` in order before taking action.
-2. Check if the canonical prompt artifact exists at `.codex/skills/prompt/.prompt/active.yaml`.
+2. Check if the canonical prompt artifact exists at `.prompt-forge/active.yaml`.
 
 ## Policies
 

@@ -20,8 +20,8 @@ if ! command -v rsync &>/dev/null; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
-SOURCE_SKILLS="$PROJECT_ROOT/.codex/skills"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+SOURCE_SKILLS="$PROJECT_ROOT/skills"
 
 if [[ ! -d "$SOURCE_SKILLS" ]]; then
     echo "Error: Source skills directory not found: $SOURCE_SKILLS" >&2

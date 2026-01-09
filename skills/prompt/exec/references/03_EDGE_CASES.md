@@ -4,7 +4,7 @@
 
 **Scenario**: User invokes `prompt-exec` but no `active.yaml` exists.
 
-**Response**: 
+**Response**:
 > "No active prompt found. Use `prompt-forge` to create one first."
 
 Do NOT attempt to infer what the user wanted.
@@ -32,6 +32,7 @@ Do NOT modify and execute in one step.
 **Scenario**: Some actions complete, others fail.
 
 **Response**:
+
 1. Report what succeeded and what failed.
 2. Do NOT delete the artifact (execution was not fully successful).
 3. Offer options:
@@ -44,8 +45,8 @@ Do NOT modify and execute in one step.
 **Scenario**: First execution, `receipts/` directory is missing.
 
 **Response**: Create the directory before writing the receipt:
-```
-.codex/skills/prompt/.prompt/receipts/
+```text
+.prompt-forge/receipts/
 ```
 
 ## Receipt write fails

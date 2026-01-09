@@ -2,7 +2,7 @@
 # windsurf.ps1 — Generate Windsurf workflows from agent skills
 #
 # Usage: .\windsurf.ps1 [skills_dir] [workflows_dir]
-#   skills_dir:   Directory containing skills (default: .codex/skills)
+#   skills_dir:   Directory containing skills (default: skills/)
 #   workflows_dir: Output directory for workflows (default: .windsurf/workflows)
 #
 
@@ -16,9 +16,9 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot = (Resolve-Path "$ScriptDir\..\..\..").Path
+$RepoRoot = (Resolve-Path "$ScriptDir\..\..").Path
 
-if (-not $SkillsDir) { $SkillsDir = Join-Path $RepoRoot ".codex\skills" }
+if (-not $SkillsDir) { $SkillsDir = Join-Path $RepoRoot "skills" }
 if (-not $WorkflowsDir) { $WorkflowsDir = Join-Path $RepoRoot ".windsurf\workflows" }
 
 # Ensure output directory exists

@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "input": "/home/jgodau/work/personal/skills/docs/schema/SKILL.md",
+  "output_dir": "/home/jgodau/work/personal/skills/docs/schema/skill-split/",
+  "created_at": "2026-01-09T21:39:43Z",
+  "rules": {
+    "split_on": "h2",
+    "promote_heading": "h2_to_h1",
+    "naming": "<NN>_<NAME_UPPERCASE>.md",
+    "intro_file": "00_INTRO.md"
+  },
+  "files": [
+    {"index": 0, "filename": "00_INTRO.md", "title": "Intro", "source_heading": null},
+    {"index": 1, "filename": "01_OVERVIEW.md", "title": "Overview", "source_heading": "## Overview"},
+    {"index": 2, "filename": "02_REQUIRED_FIELDS.md", "title": "Required Fields", "source_heading": "## Required Fields"},
+    {"index": 3, "filename": "03_OPTIONAL_FIELDS.md", "title": "Optional Fields", "source_heading": "## Optional Fields"},
+    {"index": 4, "filename": "04_COMPLETE_EXAMPLE_INDIVIDUAL_SKILL.md", "title": "Complete Example - Individual Skill", "source_heading": "## Complete Example - Individual Skill"},
+    {"index": 5, "filename": "05_REFERENCE_FILES.md", "title": "Reference Files", "source_heading": "## Reference Files"},
+    {"index": 6, "filename": "06_SCRIPTS.md", "title": "Scripts", "source_heading": "## Scripts"},
+    {"index": 7, "filename": "07_BEST_PRACTICES.md", "title": "Best Practices", "source_heading": "## Best Practices"},
+    {"index": 8, "filename": "08_SEE_ALSO.md", "title": "See Also", "source_heading": "## See Also"}
+  ]
+}

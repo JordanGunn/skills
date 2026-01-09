@@ -15,10 +15,10 @@ if [[ $# -ge 1 ]]; then
     PROJECT_ROOT="$1"
 else
     # Navigate up from .codex/scripts/install/unix/ to project root
-    PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
+    PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 fi
 
-ADAPTER_SCRIPT="$PROJECT_ROOT/.codex/scripts/adapter/windsurf.sh"
+ADAPTER_SCRIPT="$PROJECT_ROOT/scripts/adapter/windsurf.sh"
 
 if [[ ! -f "$ADAPTER_SCRIPT" ]]; then
     echo "Error: Could not find adapter script at $ADAPTER_SCRIPT" >&2

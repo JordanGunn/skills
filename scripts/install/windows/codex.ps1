@@ -16,8 +16,8 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ProjectRoot = Resolve-Path (Join-Path $ScriptDir "..\..\..\..") 
-$SourceSkills = Join-Path $ProjectRoot ".codex\skills"
+$ProjectRoot = Resolve-Path (Join-Path $ScriptDir "..\..\..") 
+$SourceSkills = Join-Path $ProjectRoot "skills"
 
 if (-not (Test-Path $SourceSkills)) {
     Write-Error "Source skills directory not found: $SourceSkills"

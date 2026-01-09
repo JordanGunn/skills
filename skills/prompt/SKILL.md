@@ -16,7 +16,7 @@ metadata:
       - prompt-exec
 
     resources:
-      root: .prompt
+      root: .prompt-forge
       assets: []
       scripts: []
       references: []
@@ -61,27 +61,29 @@ The agent may only read or modify state **inside an explicit skill invocation**.
 
 There may be **at most one active prompt artifact** at any time.
 
-**Canonical path:** `.codex/skills/prompt/.prompt/active.yaml`
+**Canonical path:** `.prompt-forge/active.yaml`
 
 ### 3. Execution is destructive
 
 After a **successful** `prompt-exec`:
+
 - The canonical prompt artifact **must be deleted**
 - The system must return to a "no active prompt" state
 
 ### 4. Optional execution receipts
 
 To preserve auditability without violating single-prompt rules:
+
 - `prompt-exec` *may* write an **execution receipt**
 - Receipts are immutable and never executable
 
-**Receipt location:** `.codex/skills/prompt/.prompt/receipts/<timestamp>-<hash>.yaml`
+**Receipt location:** `.prompt-forge/receipts/<timestamp>-<hash>.yaml`
 
 ## Member Skills
 
-| Skill | Purpose |
-|-------|---------|
+| Skill          | Purpose                                                                |
+| -------------- | ---------------------------------------------------------------------- |
 | `prompt-forge` | Shape, refine, and stabilize intent into the canonical prompt artifact |
-| `prompt-exec` | Execute the forged prompt exactly as written |
+| `prompt-exec`  | Execute the forged prompt exactly as written                           |
 
 No other prompt-related skills are permitted.

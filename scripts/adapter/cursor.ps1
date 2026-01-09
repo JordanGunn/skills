@@ -2,7 +2,7 @@
 # cursor.ps1 — Generate Cursor commands from agent skills
 #
 # Usage: .\cursor.ps1 [skills_dir] [commands_dir]
-#   skills_dir:   Directory containing skills (default: .codex/skills)
+#   skills_dir:   Directory containing skills (default: skills/)
 #   commands_dir: Output directory for commands (default: .cursor/commands)
 #
 
@@ -16,9 +16,9 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot = (Resolve-Path "$ScriptDir\..\..\..").Path
+$RepoRoot = (Resolve-Path "$ScriptDir\..\..").Path
 
-if (-not $SkillsDir) { $SkillsDir = Join-Path $RepoRoot ".codex\skills" }
+if (-not $SkillsDir) { $SkillsDir = Join-Path $RepoRoot "skills" }
 if (-not $CommandsDir) { $CommandsDir = Join-Path $RepoRoot ".cursor\commands" }
 
 # Ensure output directory exists

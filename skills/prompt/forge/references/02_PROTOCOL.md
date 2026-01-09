@@ -24,14 +24,14 @@ Treat every user statement with constructive skepticism:
 
 ### Signals to Detect
 
-| Signal | Response |
-|--------|----------|
-| Ambiguity | Ask clarifying question |
-| Contradiction | Surface the conflict explicitly |
-| Misuse of terms | Offer precise alternatives |
-| Shifting constraints | Acknowledge change, update artifact |
-| Vague scope | Propose boundaries, ask for confirmation |
-| Missing edge cases | Raise them proactively |
+| Signal               | Response                                  |
+| -------------------- | ----------------------------------------- |
+| Ambiguity            | Ask clarifying question                   |
+| Contradiction        | Surface the conflict explicitly           |
+| Misuse of terms      | Offer precise alternatives                |
+| Shifting constraints | Acknowledge change, update artifact       |
+| Vague scope          | Propose boundaries, ask for confirmation  |
+| Missing edge cases   | Raise them proactively                    |
 
 ### Reflection Format
 
@@ -61,8 +61,25 @@ Is this accurate? What should I adjust?
 
 ## State Transitions
 
-```
+```text
 [No artifact] --forge--> [drafting] --refine--> [drafting] --confirm--> [ready]
 ```
 
 The only valid transition to `ready` is through explicit user confirmation.
+
+## Skill Boundary
+
+`prompt-forge` is responsible for moving the canonical artifact toward `status: ready`.
+
+- `prompt-forge` ends after writing the artifact.
+- `prompt-exec` is the only skill allowed to execute the forged prompt.
+- No implicit execution. No combined forge+exec in a single invocation.
+
+## Quality Rubric (Optional)
+
+Grade the forged prompt before marking `ready`:
+
+- **A**: unambiguous, testable, constraints explicit, failure modes covered, safe to execute verbatim
+- **B**: mostly clear; minor ambiguity or missing edge case that is low-risk
+- **C**: material ambiguity remains; execution likely to diverge from intent
+- **D**: contradictory or underspecified; requires more refinement before execution

@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task.frontmatter.schema.json",
+  "title": "Task Frontmatter Schema",
+  "description": "Canonical schema for 00_TASK.md frontmatter metadata",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "kind",
+    "scope",
+    "risk",
+    "epistemic_state",
+    "confidence",
+    "origin",
+    "lifecycle_state",
+    "created_at",
+    "intent_hash",
+    "intent_hash_algo",
+    "intent_hash_scope"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Unique task identifier (lowercase, hyphens allowed, no leading/trailing hyphens)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Human-readable task title"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["feature", "bugfix", "refactor", "research", "documentation", "maintenance", "exploration", "spike"],
+      "description": "Task category/type"
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["trivial", "minor", "moderate", "major", "epic"],
+      "description": "Task scope/size estimation"
+    },
+    "risk": {
+      "type": "string",
+      "enum": ["none", "low", "medium", "high", "critical"],
+      "description": "Risk level assessment"
+    },
+    "epistemic_state": {
+      "type": "string",
+      "enum": ["candidate", "draft", "validated", "invalidated"],
+      "description": "Knowledge/validation state of the task"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Confidence level in task definition"
+    },
+    "origin": {
+      "type": "string",
+      "enum": ["human", "agent", "mixed"],
+      "description": "Source of task creation"
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": ["inactive", "active", "blocked", "completed", "abandoned"],
+      "description": "Current lifecycle state"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp of task creation"
+    },
+    "last_reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp of last review (optional)"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp when task expires (optional)"
+    },
+    "staleness_days_threshold": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 14,
+      "description": "Days before task is considered stale (optional, default: 14)"
+    },
+    "intent_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 hex string of canonical intent"
+    },
+    "intent_hash_algo": {
+      "type": "string",
+      "enum": ["sha256-v1"],
+      "description": "Hash algorithm version"
+    },
+    "intent_hash_scope": {
+      "type": "string",
+      "enum": ["canonical-intent"],
+      "description": "Scope of content included in hash"
+    },
+    "validated_by": {
+      "type": "string",
+      "description": "Who validated the task (optional)"
+    },
+    "validated_reason": {
+      "type": "string",
+      "description": "Why the task was validated (optional)"
+    },
+    "invalidated_by": {
+      "type": "string",
+      "description": "Who invalidated the task (optional)"
+    },
+    "invalidated_reason": {
+      "type": "string",
+      "description": "Why the task was invalidated (optional)"
+    },
+    "superseded_by": {
+      "type": "string",
+      "description": "Task ID that supersedes this one (optional)"
+    },
+    "blocked_by": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of task IDs blocking this task (optional)"
+    },
+    "depends_on": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of task IDs this task depends on (optional)"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional tags for categorization"
+    }
+  },
+  "additionalProperties": false
+}

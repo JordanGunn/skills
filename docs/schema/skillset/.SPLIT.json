@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "input": "/home/jgodau/work/personal/skills/docs/schema/SKILLSET.md",
+  "output_dir": "/home/jgodau/work/personal/skills/docs/schema/skillset-split/",
+  "created_at": "2026-01-09T21:53:11Z",
+  "rules": {
+    "split_on": "h2",
+    "promote_heading": "h2_to_h1",
+    "naming": "<NN>_<NAME_UPPERCASE>.md",
+    "intro_file": "00_INTRO.md"
+  },
+  "files": [
+    {"index": 1, "filename": "01_OVERVIEW.md", "title": "Overview", "source_heading": "## Overview"},
+    {"index": 2, "filename": "02_SCHEMA_DEFINITION.md", "title": "Schema Definition", "source_heading": "## Schema Definition"},
+    {"index": 3, "filename": "03_FIELD_DESCRIPTIONS.md", "title": "Field Descriptions", "source_heading": "## Field Descriptions"},
+    {"index": 4, "filename": "04_MANUAL_VALIDATION_CHECKLIST.md", "title": "Manual Validation Checklist", "source_heading": "## Manual Validation Checklist"},
+    {"index": 5, "filename": "05_BEST_PRACTICES.md", "title": "Best Practices", "source_heading": "## Best Practices"},
+    {"index": 6, "filename": "06_SEE_ALSO.md", "title": "See Also", "source_heading": "## See Also"}
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "task.hash.schema.json",
+  "title": "Task Hash Record Schema",
+  "description": "Schema for hash record stored in 99_STATE.md",
+  "type": "object",
+  "required": [
+    "intent_hash",
+    "intent_hash_algo",
+    "intent_hash_scope",
+    "computed_at"
+  ],
+  "properties": {
+    "intent_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 hex string of canonical intent"
+    },
+    "intent_hash_algo": {
+      "type": "string",
+      "enum": ["sha256-v1"],
+      "description": "Hash algorithm version"
+    },
+    "intent_hash_scope": {
+      "type": "string",
+      "enum": ["canonical-intent"],
+      "description": "Scope of content included in hash"
+    },
+    "computed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RFC3339 UTC timestamp when hash was computed"
+    },
+    "previous_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "Previous hash value if changed (optional)"
+    },
+    "hash_mismatch": {
+      "type": "boolean",
+      "description": "True if stored hash differs from computed hash"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,5 +1,6 @@
 ### Generated files
 .codex/skills/INDEX.md
+.prompt-forge/
 
 ### Agents
 .codex/
@@ -41,4 +42,9 @@ __pycache__/
 env/
 venv/
 .venv/
+
+### Personal dev
+.dev/
+SPEC.md
+tasks/
 
