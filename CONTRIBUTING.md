@@ -22,7 +22,7 @@ Thank you for your interest in contributing to the Agent Skills repository! This
 Before creating a new skill:
 1. Check the [Skills Reference](./docs/SKILLS.md) to avoid duplication
 2. Review similar skills to understand patterns and conventions
-3. Read the [Schema Documentation](./docs/schema/SKILL.md) to understand structure
+3. Read the [Schema Documentation](./docs/schema/skill/01_OVERVIEW.md) to understand structure
 
 ### Understand the Philosophy
 
@@ -40,11 +40,13 @@ Skills in this repository are designed to:
 ### Step 1: Choose a Category
 
 Organize your skill into an appropriate category directory:
-- `adapter/` - IDE and tool integrations
-- `index/` - Discovery and cataloging
+- `doctor/` - Diagnostic protocol skills
+- `md/` - Markdown processing skills
 - `plan/` - Planning and execution
+- `prompt/` - Prompt forging and execution
 - `refactor/` - Code quality and improvements
-- Or create a new category if needed
+- `task/` - Task lifecycle management
+- Or create a new category/skillset if needed
 
 ### Step 2: Create Directory Structure
 
@@ -160,8 +162,8 @@ $ErrorActionPreference = "Stop"
 ### Step 6: Update Documentation
 
 1. **Add to README** - Include your skill in the appropriate section
-2. **Regenerate INDEX** - Run `./scripts/index/index.sh` or `.\scripts\index\index.ps1`
-3. **Update Skills Reference** - Add entry to `docs/SKILLS.md`
+2. **Update Skills Reference** - Add entry to `docs/SKILLS.md`
+3. **Update Skill Index** - The skill will be included in the auto-generated index at `skills/.INDEX.md`
 
 ---
 
@@ -292,9 +294,9 @@ If member skills share common resources:
 ### Step 6: Update Documentation
 
 1. **Add to README** - Include skillset in appropriate section
-2. **Regenerate INDEX** - Run index script
-3. **Add to Skillsets docs** - Update `docs/SKILLSETS.md`
-4. **Document orchestration** - Explain how skills work together
+2. **Add to Skillsets docs** - Update `docs/SKILLSETS.md`
+3. **Document orchestration** - Explain how skills work together
+4. **Update Skills Reference** - Add member skills to `docs/SKILLS.md`
 
 ---
 
@@ -355,18 +357,6 @@ cd your-skill
 .\scripts\your-script.ps1
 ```
 
-### Regenerate Index
-
-```bash
-# Unix/macOS/Linux
-./scripts/index/index.sh
-
-# Windows PowerShell
-.\scripts\index\index.ps1
-```
-
-Check that your skill appears in `INDEX.md` with correct metadata.
-
 ### Validate Schema
 
 If available, use the skills-ref validator:
@@ -397,7 +387,6 @@ git checkout -b add-your-skill-name
 
 - Validate schema compliance
 - Test all scripts
-- Regenerate INDEX.md
 - Review all changes
 
 ### 4. Commit with Clear Messages
@@ -438,7 +427,6 @@ Why this skill is needed and what problems it solves.
 - [ ] SKILL.md contains only frontmatter
 - [ ] All references follow naming convention
 - [ ] Scripts work on target platforms
-- [ ] INDEX.md regenerated
 - [ ] Documentation updated
 
 ## Additional Notes
@@ -476,8 +464,7 @@ Any other relevant information.
 
 ### Resources
 
-- [Agent Skills Specification](./SPEC.md) - Official format spec
-- [Schema Documentation](./docs/schema/SKILL.md) - Detailed schema reference
+- [Schema Documentation](./docs/schema/skill/01_OVERVIEW.md) - Detailed schema reference
 - [Skills Reference](./docs/SKILLS.md) - Examples of existing skills
 - [Skillsets Documentation](./docs/SKILLSETS.md) - Orchestrator patterns
 

@@ -2,57 +2,79 @@
 
 This document provides a comprehensive reference of all individual skills available in this repository. For information about skillsets (orchestrator skills), see [Skillsets Documentation](./SKILLSETS.md).
 
-> **Note:** This is a curated view of skills from the auto-generated [INDEX.md](../INDEX.md). The index includes additional metadata like keywords and pipelines.
+> **Note:** This is a curated view of skills from the auto-generated [Skill Index](../skills/.INDEX.md). The index includes additional metadata like keywords and pipelines.
 
 ---
 
-## Adapter Skills
+## Doctor Skills
 
-Adapter skills generate IDE and tool integrations from agent skills.
+Diagnostic protocol skills using a medical-model approach for software failures.
 
-### `adapter-cursor`
+### `doctor-exam`
 
-**Path:** `adapter/cursor/`
+**Path:** `doctor/exam/`
 
-Generate Cursor commands from agent skills. Creates plain markdown command files that delegate to skill references, enabling Cursor to invoke agent skills.
+Conduct a focused, evidence-driven examination of ONE triaged suspect area.
 
-**Keywords:** `adapter`, `cursor`, `command`, `generate`
-
-**Scripts:**
-- `scripts/adapter/cursor.sh` (macOS/Linux/WSL)
-- `scripts/adapter/cursor.ps1` (Windows)
+**Keywords:** `exam`, `evidence`, `focused`, `investigation`, `confirm`, `falsify`, `hypothesis`
 
 ---
 
-### `adapter-windsurf`
+### `doctor-intake`
 
-**Path:** `adapter/windsurf/`
+**Path:** `doctor/intake/`
 
-Generate Windsurf workflows from agent skills. Creates thin workflow adapters that point to skill references, enabling Windsurf to invoke agent skills via slash commands.
+Convert the user's raw description into a clinically precise intake note.
 
-**Keywords:** `adapter`, `windsurf`, `workflow`, `generate`, `slash command`
-
-**Scripts:**
-- `scripts/adapter/windsurf.sh` (macOS/Linux/WSL)
-- `scripts/adapter/windsurf.ps1` (Windows)
+**Keywords:** `intake`, `capture`, `normalize`, `observation`, `symptoms`, `witness`, `belief`
 
 ---
 
-## Index Skill
+### `doctor-treatment`
 
-Skill indexing and discovery functionality.
+**Path:** `doctor/treatment/`
 
-### `index`
+Produce a treatment note that combines diagnosis, confidence, supporting evidence, and actionable options.
 
-**Path:** `index/`
+**Keywords:** `treatment`, `diagnosis`, `proposal`, `options`, `confidence`, `risk`, `approval`
 
-Generate a hierarchical index of all skills from SKILL.md files. Produces a Markdown index optimized for agent lookup with skillsets, member skills, keywords, and pipelines.
+---
 
-**Keywords:** `index`, `skill`, `skills`, `discovery`, `lookup`, `catalog`, `registry`, `skillset`, `perform`, `capability`
+### `doctor-triage`
 
-**Scripts:**
-- `scripts/index/index.sh` (macOS/Linux/WSL)
-- `scripts/index/index.ps1` (Windows)
+**Path:** `doctor/triage/`
+
+Perform breadth-first hypothesis surfacing and prioritization across all suspect zones.
+
+**Keywords:** `triage`, `hypothesis`, `breadth`, `prioritization`, `likelihood`, `zones`
+
+---
+
+## Markdown Skills
+
+Skills for chunking and processing markdown documents.
+
+### `md-split`
+
+**Path:** `md/split/`
+
+Splits a Markdown file by H2 headings into numbered documents, generates an index, and creates summaries.
+
+**Keywords:** `markdown`, `split`, `chunking`, `docs`, `index`, `summary`
+
+---
+
+## Mimic Skills
+
+Standalone persona overlay skills.
+
+### `mimic`
+
+**Path:** `mimic/`
+
+Persona overlay skill. Applies stylistic transforms to prose output.
+
+**Keywords:** `mimic`, `persona`, `overlay`
 
 ---
 
@@ -121,6 +143,30 @@ Display the execution status of a plan by parsing frontmatter metadata. Shows pr
 - `pending`: Task not yet started
 - `in_progress`: Task currently being worked on
 - `complete`: Task finished
+
+---
+
+## Prompt Skills
+
+Skills for shaping and executing human intent into stable prompts.
+
+### `prompt-forge`
+
+**Path:** `prompt/forge/`
+
+Shape, refine, and stabilize human intent into a canonical prompt artifact before execution.
+
+**Keywords:** `prompt`, `forge`, `shape`, `refine`, `stabilize`, `intent`, `draft`, `formulate`, `clarify`
+
+---
+
+### `prompt-exec`
+
+**Path:** `prompt/exec/`
+
+Execute the forged prompt exactly as written, with no reinterpretation.
+
+**Keywords:** `prompt`, `execute`, `confirm`, `proceed`, `go`, `run`
 
 ---
 
@@ -239,6 +285,24 @@ Audit semantic noise and namespace integrity.
 
 ---
 
+### `refactor-squatters`
+
+**Path:** `refactor/squatters/`
+
+Detect squatters: modules and packages that occupy namespace positions without proper semantic justification.
+
+**Keywords:** `squatters`, `namespace`, `integrity`, `misplaced`, `utility dump`, `utils`, `helpers`, `common`, `wrong home`, `axis violation`, `homeless concept`, `layer bleeding`, `semantic diffusion`, `sibling`, `stutter`
+
+**References:**
+- `01_GOAL.md`
+- `02_DEFINITIONS.md`
+- `03_INVARIANTS.md`
+- `04_SCOPE.md`
+- `05_CHECKS.md`
+- `06_OUTPUT.md`
+
+---
+
 ### `refactor-structural-duplication`
 
 **Path:** `refactor/structural-duplication/`
@@ -257,97 +321,110 @@ Identify structurally duplicate logic (pipeline-spine duplication) across semant
 
 ---
 
+## Task Skills
+
+Task lifecycle management skills for creating, validating, and tracking tasks.
+
+### `task-activate`
+
+**Path:** `task/activate/`
+
+Activate a task by setting lifecycle_state to active. Refuses activation if epistemic_state is not validated.
+
+**Keywords:** `task`, `activate`, `enable`, `start`, `run`, `begin`
+
+---
+
+### `task-create`
+
+**Path:** `task/create/`
+
+Create a new task directory with 00_TASK.md from template.
+
+**Keywords:** `task`, `create`, `new`, `initialize`, `init`, `start`, `begin`
+
+---
+
+### `task-invalidate`
+
+**Path:** `task/invalidate/`
+
+Invalidate a task by setting epistemic_state to invalidated. Requires a reason.
+
+**Keywords:** `task`, `invalidate`, `cancel`, `revoke`, `obsolete`, `supersede`
+
+---
+
+### `task-list`
+
+**Path:** `task/list/`
+
+List tasks from a root directory with optional filters. Supports filtering by lifecycle_state, epistemic_state, and staleness.
+
+**Keywords:** `task`, `list`, `show`, `find`, `filter`, `search`
+
+---
+
+### `task-next`
+
+**Path:** `task/next/`
+
+Navigate to the next task in chronological order. Returns the task ID and path.
+
+**Keywords:** `task`, `next`, `forward`, `navigate`
+
+---
+
+### `task-prev`
+
+**Path:** `task/prev/`
+
+Navigate to the previous task in chronological order. Returns the task ID and path.
+
+**Keywords:** `task`, `prev`, `previous`, `back`, `navigate`
+
+---
+
+### `task-review`
+
+**Path:** `task/review/`
+
+Review a task by updating last_reviewed_at timestamp. Recomputes derived status for freshness tracking.
+
+**Keywords:** `task`, `review`, `inspect`, `check`, `refresh`, `update`
+
+---
+
+### `task-status`
+
+**Path:** `task/status/`
+
+Compute and display derived status for a task. Runs deterministic status checks without modifying the task.
+
+**Keywords:** `task`, `status`, `info`, `check`, `display`, `show`
+
+---
+
+### `task-validate`
+
+**Path:** `task/validate/`
+
+Validate a task by setting epistemic_state to validated. Requires explicit human approval.
+
+**Keywords:** `task`, `validate`, `verify`, `confirm`, `approve`, `validation`
+
+---
+
 ## Keyword Index
 
-Use keywords to quickly find relevant skills:
+For a complete and up-to-date keyword index, see the [auto-generated Skill Index](../skills/.INDEX.md).
 
-| Keyword | Skills |
-|---------|--------|
-| `abstraction` | `refactor-structural-duplication` |
-| `adapter` | `adapter-cursor`, `adapter-windsurf` |
-| `agent` | `refactor-lexical-ontology` |
-| `artifact` | `refactor-lexical-ontology` |
-| `boundary` | `refactor-semantic-noise` |
-| `capability` | `index` |
-| `catalog` | `index` |
-| `collision` | `refactor-import-hygiene` |
-| `command` | `adapter-cursor` |
-| `complete` | `plan-exec` |
-| `complexity` | `refactor-inline-complexity` |
-| `convention` | `refactor-lexical-ontology` |
-| `cursor` | `adapter-cursor` |
-| `dataclass` | `refactor-dictionaries` |
-| `dictionary` | `refactor-dictionaries` |
-| `dict` | `refactor-dictionaries` |
-| `discovery` | `index` |
-| `draft` | `plan-create` |
-| `drift` | `refactor-structural-duplication` |
-| `duplication` | `refactor-structural-duplication` |
-| `execute` | `plan-exec` |
-| `extraction` | `refactor-inline-complexity`, `refactor-structural-duplication` |
-| `flatten` | `refactor-inline-complexity` |
-| `from import` | `refactor-import-hygiene` |
-| `generate` | `adapter-cursor`, `adapter-windsurf` |
-| `handoff` | `plan-exec` |
-| `import` | `refactor-import-hygiene` |
-| `imports` | `refactor-import-hygiene` |
-| `index` | `index` |
-| `intermediate` | `refactor-inline-complexity` |
-| `lexical` | `refactor-lexical-ontology` |
-| `lookup` | `index` |
-| `module` | `refactor-module-stutter` |
-| `namespace` | `refactor-import-hygiene`, `refactor-semantic-noise` |
-| `naming` | `refactor-lexical-ontology`, `refactor-module-stutter` |
-| `nested` | `refactor-inline-complexity` |
-| `noise` | `refactor-semantic-noise` |
-| `ontology` | `refactor-lexical-ontology` |
-| `package` | `refactor-module-stutter` |
-| `perform` | `index` |
-| `phase` | `plan-create`, `plan-exec` |
-| `pipeline` | `refactor-structural-duplication` |
-| `planning` | `plan-create` |
-| `plan` | `plan-create`, `plan-exec`, `plan-status` |
-| `prefix` | `refactor-module-stutter`, `refactor-semantic-noise` |
-| `process` | `refactor-lexical-ontology` |
-| `progress` | `plan-status` |
-| `public API` | `refactor-dictionaries`, `refactor-module-stutter` |
-| `readability` | `refactor-inline-complexity` |
-| `redundant` | `refactor-module-stutter`, `refactor-semantic-noise` |
-| `registry` | `index` |
-| `roman numerals` | `plan-exec` |
-| `semantic` | `refactor-lexical-ontology`, `refactor-semantic-noise` |
-| `shadowing` | `refactor-import-hygiene` |
-| `sketch` | `plan-create` |
-| `skill` | `index` |
-| `skills` | `index` |
-| `slash command` | `adapter-windsurf` |
-| `spine` | `refactor-structural-duplication` |
-| `status` | `plan-status` |
-| `structural` | `refactor-structural-duplication` |
-| `stutter` | `refactor-module-stutter` |
-| `sub-plan` | `plan-create`, `plan-exec` |
-| `sub-plans` | `plan-create` |
-| `subtask` | `plan-create`, `plan-exec` |
-| `subtasks` | `plan-create`, `plan-exec` |
-| `suffix` | `refactor-lexical-ontology`, `refactor-semantic-noise` |
-| `symbol` | `refactor-import-hygiene` |
-| `task file` | `plan-exec` |
-| `task` | `plan-create`, `plan-exec` |
-| `tasks` | `plan-create`, `plan-exec` |
-| `taxonomy` | `refactor-semantic-noise` |
-| `tracking` | `plan-status` |
-| `TypedDict` | `refactor-dictionaries` |
-| `type safety` | `refactor-dictionaries` |
-| `typing` | `refactor-dictionaries` |
-| `unification` | `refactor-structural-duplication` |
-| `variable` | `refactor-inline-complexity` |
-| `windsurf` | `adapter-windsurf` |
-| `workflow` | `adapter-windsurf` |
+The keyword index maps common terms to relevant skills, making it easy to discover skills based on the task you need to accomplish. Each skill includes keywords in its frontmatter that describe its purpose and functionality.
 
 ---
 
 ## See Also
 
 - [Skillsets Documentation](./SKILLSETS.md) - Learn about orchestrator skills
-- [Auto-generated INDEX.md](../INDEX.md) - Complete index with pipelines
-- [Schema Documentation](./schema/SKILL.md) - Understand skill structure
+- [Auto-generated Skill Index](../skills/.INDEX.md) - Complete index with keywords and pipelines
+- [Schema Documentation](./schema/skill/01_OVERVIEW.md) - Understand skill structure
