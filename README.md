@@ -6,20 +6,18 @@ A collection of structured skills for AI agents to perform specific tasks effect
 
 **Recent Updates (January 2026):**
 
-- ✨ **New Skill**: `plan-status` - Track plan execution progress with frontmatter parsing
-- 🪟 **Windows Support**: PowerShell (`.ps1`) scripts added to `adapter`, `index`, and `plan` skills
-- 📦 **Adapter Skillset**: Created `SKILLSET` for coordinating IDE adapter generation
-- 📊 **Plan Status Tracking**: Added frontmatter status values (`pending`, `in_progress`, `complete`)
-- 🔄 **Enhanced Plan Skills**: All plan skills now support artifact status parsing
-
-See [CHANGELOG.md](./CHANGELOG.md) for complete release history.
+- ✨ **New Skillsets**: `doctor`, `md`, `prompt`, and `task` skillsets for comprehensive workflow orchestration
+- 🎭 **Standalone Skills**: `mimic` skill for persona overlay and stylistic transforms
+- 📊 **Plan Status Tracking**: `plan-status` skill for tracking plan execution progress
+- 🔍 **Refactor Suite**: Complete code quality audit skills including `refactor-squatters`
+- 📋 **Task Management**: Full task lifecycle management with validation and chronological awareness
 
 ## Quick Links
 
 - 📚 [Skills Reference](./docs/SKILLS.md) - Browse all available skills
 - 🎯 [Skillsets](./docs/SKILLSETS.md) - Learn about orchestrator skills
-- 📋 [INDEX.md](./INDEX.md) - Auto-generated skill index with keywords
-- 📖 [Formal Specification](./SPEC.md) - Official Agent Skills format
+- 📋 [Skill Index](./skills/.INDEX.md) - Auto-generated skill index with keywords
+- 📖 [Quickstart Guide](./docs/QUICKSTART.md) - Get started quickly
 
 ## Overview
 
@@ -36,7 +34,7 @@ This repository provides **agent skills** - structured instructions that help AI
 - **Skillsets**: Orchestrator skills that coordinate multiple related skills
 - **Cross-Platform**: Scripts for both Unix/macOS/Linux (`.sh`) and Windows (`.ps1`)
 - **Progressive Disclosure**: Frontmatter-only `SKILL.md` files that reference detailed documentation
-- **Spec Compliant**: Follows the [Agent Skills specification](./SPEC.md)
+- **Spec Compliant**: Follows the Agent Skills specification
 
 ## Documentation
 
@@ -51,22 +49,25 @@ This repository provides **agent skills** - structured instructions that help AI
 ### Reference Documentation
 
 - **[Skills Reference](./docs/SKILLS.md)** - Complete guide to individual skills
-  - Adapter skills (Cursor, Windsurf)
-  - Index skill (skill discovery)
+  - Doctor skills (diagnostic protocol)
+  - Markdown skills (chunking workflows)
   - Plan skills (create, exec, status)
+  - Prompt skills (forge, exec)
   - Refactor skills (code quality audits)
+  - Task skills (lifecycle management)
+  - Standalone skills (mimic)
   - Keyword index for quick lookup
 
 - **[Skillsets](./docs/SKILLSETS.md)** - Understanding orchestrator skills
   - What are skillsets?
   - How skillsets work
-  - Available skillsets (adapter, plan, refactor)
+  - Available skillsets (doctor, md, plan, prompt, refactor, task)
   - Creating new skillsets
 
-- **[Schema Documentation](./docs/schema/SKILL.md)** - Technical reference
+- **[Schema Documentation](./docs/schema/skill/01_OVERVIEW.md)** - Technical reference
   - SKILL.md frontmatter schema
   - SKILLSET custom schema
-  - Plan artifact frontmatter
+  - Reference files and scripts
   - Examples and validation
 
 - **[Contributing Guidelines](./CONTRIBUTING.md)** - Add your own skills
@@ -79,60 +80,77 @@ This repository provides **agent skills** - structured instructions that help AI
 
 ### Skillsets (Orchestrators)
 
-- **[adapter](./adapter/SKILL.md)** - Coordinate IDE adapter generation (Windsurf, Cursor)
-- **[plan](./plan/SKILL.md)** - Coordinate planning, execution, and status tracking
-- **[refactor](./refactor/SKILL.md)** - Coordinate code quality audits
+- **[doctor](./skills/doctor/SKILL.md)** - Medical-model diagnostic protocol for software failures
+- **[md](./skills/md/SKILL.md)** - Coordinate markdown chunking workflows (split → index → summary)
+- **[plan](./skills/plan/SKILL.md)** - Coordinate planning, execution, and status tracking
+- **[prompt](./skills/prompt/SKILL.md)** - Coordinate prompt forging and execution
+- **[refactor](./skills/refactor/SKILL.md)** - Coordinate code quality audits
+- **[task](./skills/task/SKILL.md)** - Coordinate task creation and lifecycle management
 
 ### Individual Skills
 
-**Adapter Skills:**
+**Doctor Skills:**
 
-- [adapter-cursor](./adapter/cursor/SKILL.md) - Generate Cursor commands
-- [adapter-windsurf](./adapter/windsurf/SKILL.md) - Generate Windsurf workflows
+- [doctor-exam](./skills/doctor/exam/SKILL.md) - Conduct focused, evidence-driven examination
+- [doctor-intake](./skills/doctor/intake/SKILL.md) - Convert raw descriptions into intake notes
+- [doctor-treatment](./skills/doctor/treatment/SKILL.md) - Produce treatment notes with diagnosis
+- [doctor-triage](./skills/doctor/triage/SKILL.md) - Perform hypothesis surfacing and prioritization
 
-**Index Skill:**
+**Markdown Skills:**
 
-- [index](./index/SKILL.md) - Generate hierarchical skill index
+- [md-split](./skills/md/split/SKILL.md) - Split markdown files by H2 headings
 
 **Plan Skills:**
 
-- [plan-create](./plan/create/SKILL.md) - Create execution plans
-- [plan-exec](./plan/exec/SKILL.md) - Execute existing plans
-- [plan-status](./plan/status/SKILL.md) - Track plan progress (NEW!)
+- [plan-create](./skills/plan/create/SKILL.md) - Create execution plans
+- [plan-exec](./skills/plan/exec/SKILL.md) - Execute existing plans
+- [plan-status](./skills/plan/status/SKILL.md) - Track plan progress
+
+**Prompt Skills:**
+
+- [prompt-forge](./skills/prompt/forge/SKILL.md) - Shape and refine human intent into canonical prompts
+- [prompt-exec](./skills/prompt/exec/SKILL.md) - Execute forged prompts exactly as written
 
 **Refactor Skills:**
 
-- [refactor-dictionaries](./refactor/dictionaries/SKILL.md) - Audit dictionary usage
-- [refactor-import-hygiene](./refactor/import-hygiene/SKILL.md) - Audit Python imports
-- [refactor-inline-complexity](./refactor/inline-complexity/SKILL.md) - Audit inline complexity
-- [refactor-lexical-ontology](./refactor/lexical-ontology/SKILL.md) - Audit identifiers
-- [refactor-module-stutter](./refactor/module-stutter/SKILL.md) - Detect module name stutter
-- [refactor-semantic-noise](./refactor/semantic-noise/SKILL.md) - Audit semantic noise
-- [refactor-structural-duplication](./refactor/structural-duplication/SKILL.md) - Identify structural duplication
+- [refactor-dictionaries](./skills/refactor/dictionaries/SKILL.md) - Audit dictionary usage
+- [refactor-import-hygiene](./skills/refactor/import-hygiene/SKILL.md) - Audit Python imports
+- [refactor-inline-complexity](./skills/refactor/inline-complexity/SKILL.md) - Audit inline complexity
+- [refactor-lexical-ontology](./skills/refactor/lexical-ontology/SKILL.md) - Audit identifiers
+- [refactor-module-stutter](./skills/refactor/module-stutter/SKILL.md) - Detect module name stutter
+- [refactor-semantic-noise](./skills/refactor/semantic-noise/SKILL.md) - Audit semantic noise
+- [refactor-squatters](./skills/refactor/squatters/SKILL.md) - Detect namespace squatters
+- [refactor-structural-duplication](./skills/refactor/structural-duplication/SKILL.md) - Identify structural duplication
 
-See [Skills Reference](./docs/SKILLS.md) for detailed descriptions and [INDEX.md](./INDEX.md) for the auto-generated index.
+**Task Skills:**
+
+- [task-activate](./skills/task/activate/SKILL.md) - Activate a task
+- [task-create](./skills/task/create/SKILL.md) - Create a new task
+- [task-invalidate](./skills/task/invalidate/SKILL.md) - Invalidate a task
+- [task-list](./skills/task/list/SKILL.md) - List tasks with filters
+- [task-next](./skills/task/next/SKILL.md) - Navigate to next task
+- [task-prev](./skills/task/prev/SKILL.md) - Navigate to previous task
+- [task-review](./skills/task/review/SKILL.md) - Review a task
+- [task-status](./skills/task/status/SKILL.md) - Display task status
+- [task-validate](./skills/task/validate/SKILL.md) - Validate a task
+
+**Standalone Skills:**
+
+- [mimic](./skills/mimic/SKILL.md) - Persona overlay skill for stylistic transforms
+
+See [Skills Reference](./docs/SKILLS.md) for detailed descriptions and [Skill Index](./skills/.INDEX.md) for the auto-generated index.
 
 ## Quick Start
 
-### Install Skills
+### Using Skills
 
-**macOS / Linux / WSL:**
+Skills are structured instructions that can be used by AI agents. Each skill includes:
 
-```bash
-./scripts/install/unix/windsurf.sh  # Install for Windsurf
-./scripts/install/unix/cursor.sh    # Install for Cursor
-./scripts/index/index.sh            # Generate skill index
-```
+- **SKILL.md**: Frontmatter with metadata and description
+- **references/**: Detailed documentation loaded as needed
+- **scripts/**: Cross-platform automation scripts (when applicable)
 
-**Windows (PowerShell):**
-
-```powershell
-.\scripts\install\windows\windsurf.ps1  # Install for Windsurf
-.\scripts\install\windows\cursor.ps1    # Install for Cursor
-.\scripts\index\index.ps1               # Generate skill index
-```
-
-See [Quickstart Guide](./docs/QUICKSTART.md) for more details.
+To use a skill, refer to its `SKILL.md` file and associated reference documentation. See the [Quickstart Guide](./docs/QUICKSTART.md) for detailed usage instructions.
 
 ## Understanding Skills
 
@@ -156,36 +174,38 @@ skill-name/
 - **references/**: Progressive disclosure - detailed instructions loaded as needed
 - **scripts/**: Cross-platform automation with identical functionality
 
-See [Schema Documentation](./docs/04_SCHEMAS.md) for complete details.
+See [Schema Documentation](./docs/schema/skill/01_OVERVIEW.md) for complete details.
 
 ### Skillsets
 
 Skillsets are orchestrator skills that coordinate multiple related skills:
 
-- **`adapter` skillset**: Coordinates Windsurf and Cursor adapter generation
+- **`doctor` skillset**: Diagnostic protocol for software failures using medical-model approach
+- **`md` skillset**: Coordinates markdown chunking workflows
 - **`plan` skillset**: Coordinates plan creation, execution, and status tracking
+- **`prompt` skillset**: Coordinates prompt forging and execution for safe intent handling
 - **`refactor` skillset**: Coordinates code quality audits in recommended order
+- **`task` skillset**: Coordinates task lifecycle management with validation
 
 Skillsets use a strict `metadata.skillset` schema that maintains spec compliance while providing orchestration capabilities.
 
-See [Skillsets Documentation](./docs/03_SKILLSETS.md) to learn more.
+See [Skillsets Documentation](./docs/SKILLSETS.md) to learn more.
 
 ## Contributing
 
 We welcome contributions! Before adding a new skill:
 
 1. **Check existing skills** to avoid duplication
-2. **Review the [Contributing Guidelines](./docs/05_CONTRIBUTING.md)** for detailed instructions
+2. **Review the [Contributing Guidelines](./CONTRIBUTING.md)** for detailed instructions
 3. **Follow the schema requirements** for skills or skillsets
-4. **Test thoroughly** including cross-platform scripts
-5. **Regenerate the index** using `./scripts/index/index.sh` or `.\scripts\index\index.ps1`
+4. **Test thoroughly** including cross-platform scripts when applicable
 
 ### Key Requirements
 
 - ✅ `SKILL.md` must contain **only frontmatter** (no body content)
-- ✅ Skills must follow the [canonical schema](./docs/schema/SKILL.md)
+- ✅ Skills must follow the canonical schema
 - ✅ Skillsets must use the strict `metadata.skillset` schema
-- ✅ Scripts should support both Unix (`.sh`) and Windows (`.ps1`)
+- ✅ Scripts should support both Unix (`.sh`) and Windows (`.ps1`) when applicable
 - ✅ Reference files must follow `NN_TOPIC.md` naming convention
 
 See the [Contributing Guidelines](./CONTRIBUTING.md) for complete details.
