@@ -97,19 +97,36 @@ Dependencies that the skillset assumes or provisions. Implementation is to be de
 
 ## Available Skillsets
 
-### `adapter`
+### `doctor`
 
-**Path:** `adapter/`
+**Path:** `doctor/`
 
-Orchestrates IDE adapter generation for multiple platforms.
+Diagnostic protocol for software failures using a medical-model approach.
 
 **Member Skills:**
-- `adapter-windsurf` - Generate Windsurf workflows
-- `adapter-cursor` - Generate Cursor commands
+- `doctor-intake` - Convert raw descriptions into intake notes
+- `doctor-triage` - Perform hypothesis surfacing and prioritization
+- `doctor-exam` - Conduct focused, evidence-driven examination
+- `doctor-treatment` - Produce treatment notes with diagnosis
 
-**Default Pipeline:** `adapter-windsurf` → `adapter-cursor`
+**Default Pipeline:** `doctor-intake` → `doctor-triage` → `doctor-exam` → `doctor-treatment`
 
-**Use Case:** Keep all IDE integrations in sync by regenerating adapters for all supported IDEs.
+**Use Case:** Systematic diagnosis of complex software issues without premature action or wrong-layer fixation.
+
+---
+
+### `md`
+
+**Path:** `md/`
+
+Orchestrates markdown chunking workflows (split → index → summary).
+
+**Member Skills:**
+- `md-split` - Split markdown files by H2 headings
+
+**Default Pipeline:** `md-split`
+
+**Use Case:** Process large markdown documents into manageable chunks with automatic indexing and summarization.
 
 ---
 
@@ -140,6 +157,27 @@ Orchestrates development phase management from planning through execution to sta
 
 ---
 
+### `prompt`
+
+**Path:** `prompt/`
+
+Orchestrates prompt forging and execution with intent safety.
+
+**Member Skills:**
+- `prompt-forge` - Shape and refine human intent into canonical prompts
+- `prompt-exec` - Execute forged prompts exactly as written
+
+**Default Pipeline:** `prompt-forge` → `prompt-exec`
+
+**Allowed Combinations:**
+- `[prompt-forge]` - Just forge the prompt
+- `[prompt-exec]` - Execute an existing prompt
+- `[prompt-forge, prompt-exec]` - Forge and execute
+
+**Use Case:** Separate intent formation from execution to protect against premature or misaligned actions.
+
+---
+
 ### `refactor`
 
 **Path:** `refactor/`
@@ -149,6 +187,7 @@ Orchestrates comprehensive code quality audits and structural improvements.
 **Member Skills:**
 - `refactor-lexical-ontology` - Audit identifiers and namespaces
 - `refactor-module-stutter` - Detect module name stutter
+- `refactor-squatters` - Detect namespace squatters
 - `refactor-semantic-noise` - Audit semantic noise
 - `refactor-dictionaries` - Audit dictionary usage
 - `refactor-inline-complexity` - Audit inline complexity
@@ -159,15 +198,16 @@ Orchestrates comprehensive code quality audits and structural improvements.
 Recommended audit sequence (naming → structure → hygiene):
 1. `refactor-lexical-ontology`
 2. `refactor-module-stutter`
-3. `refactor-semantic-noise`
-4. `refactor-dictionaries`
-5. `refactor-inline-complexity`
-6. `refactor-import-hygiene`
-7. `refactor-structural-duplication`
+3. `refactor-squatters`
+4. `refactor-semantic-noise`
+5. `refactor-dictionaries`
+6. `refactor-inline-complexity`
+7. `refactor-import-hygiene`
+8. `refactor-structural-duplication`
 
 **Allowed Combinations:**
 - Any individual skill
-- Naming cluster: `[refactor-lexical-ontology, refactor-module-stutter, refactor-semantic-noise]`
+- Naming cluster: `[refactor-lexical-ontology, refactor-module-stutter, refactor-squatters, refactor-semantic-noise]`
 - Post-refactor hygiene: `[refactor-import-hygiene, refactor-inline-complexity]`
 - Full audit: All skills in default order
 
@@ -176,6 +216,35 @@ Recommended audit sequence (naming → structure → hygiene):
 **Shared Resources:**
 - `OUTPUT_FORMAT.md` - Standard report format
 - `SEVERITY_LEVELS.md` - Severity classification
+
+---
+
+### `task`
+
+**Path:** `task/`
+
+Orchestrates task lifecycle management with validation and chronological awareness.
+
+**Member Skills:**
+- `task-create` - Create new tasks
+- `task-validate` - Validate tasks
+- `task-review` - Review tasks
+- `task-activate` - Activate tasks
+- `task-invalidate` - Invalidate tasks
+- `task-status` - Display task status
+- `task-list` - List tasks with filters
+- `task-next` - Navigate to next task
+- `task-prev` - Navigate to previous task
+
+**Default Pipeline:** `task-create` → `task-validate` → `task-activate`
+
+**Allowed Combinations:**
+- Create workflow: `[task-create, task-validate, task-activate]`
+- List and navigate: `[task-list, task-next, task-prev]`
+- Status tracking: `[task-status, task-review]`
+- Lifecycle control: `[task-activate, task-invalidate]`
+
+**Use Case:** Standardized task creation and lifecycle management with explicit validation and deterministic integrity.
 
 ---
 
