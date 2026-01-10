@@ -387,7 +387,6 @@ git checkout -b add-your-skill-name
 
 - Validate schema compliance
 - Test all scripts
-- Regenerate INDEX.md
 - Review all changes
 
 ### 4. Commit with Clear Messages

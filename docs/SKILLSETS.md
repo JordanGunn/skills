@@ -366,5 +366,4 @@ The `requires` field is reserved for future dependency management:
 ## See Also
 
 - [Skills Reference](./SKILLS.md) - Individual skills documentation
-- [Schema Documentation](./schema/SKILL.md) - Detailed schema reference
-- [SPEC.md](../SPEC.md) - Agent Skills specification
+- [Schema Documentation](./schema/skill/01_OVERVIEW.md) - Detailed schema reference
