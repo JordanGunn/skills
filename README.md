@@ -1,5 +1,7 @@
 # Agent Skills
 
+> **⚠️ DEPRECATED**: This repository is no longer being maintained. Development has moved to [nunchuck](https://github.com/JordanGunn/nunchuck).
+
 A collection of structured skills for AI agents to perform specific tasks effectively and avoid common pitfalls in agentic programming.
 
 ## What's New
